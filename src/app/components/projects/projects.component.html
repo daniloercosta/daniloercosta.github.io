@@ -1,0 +1,15 @@
+<h2>Meus Projetos no GitHub</h2>
+
+<div *ngIf="repos.length > 0; else loading">
+  <mat-card *ngFor="let repo of repos" class="repo-card">
+    <mat-card-title>{{ repo.name }}</mat-card-title>
+    <mat-card-content>
+      <p>{{ repo.description || 'Sem descrição' }}</p>
+      <a mat-button color="primary" [href]="repo.html_url" target="_blank">Ver no GitHub</a>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <p>Carregando repositórios...</p>
+</ng-template>

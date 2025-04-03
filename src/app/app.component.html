@@ -1,0 +1,21 @@
+<mat-sidenav-container class="container">
+  <mat-sidenav mode="side" opened>
+    <h3>Meu Portfólio</h3>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/">🏠 Início</a>
+      <a mat-list-item routerLink="/sobre">👤 Sobre</a>
+      <a mat-list-item routerLink="/projetos">💻 Projetos</a>
+      <a mat-list-item routerLink="/contato">📩 Contato</a>
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <span>{{ title }}</span>
+    </mat-toolbar>
+
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
