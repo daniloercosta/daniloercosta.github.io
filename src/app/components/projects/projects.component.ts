@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-projects',
-  imports: [HttpClientModule, MatCardModule, MatButtonModule,CommonModule],
+  imports: [MatCardModule, MatButtonModule,CommonModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })

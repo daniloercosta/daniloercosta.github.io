@@ -1,0 +1,43 @@
+.home-container {
+  text-align: center;
+  padding: 20px;
+}
+
+.carousel {
+  width: 80%;
+  margin: auto;
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: center;
+}
+
+.projeto-card {
+  width: 300px;
+}
+
+.redes-sociais {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.tecnologias {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tag {
+  background-color: #3f51b5;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.contato {
+  margin-top: 20px;
+}
