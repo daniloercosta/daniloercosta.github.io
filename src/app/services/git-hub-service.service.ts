@@ -7,43 +7,59 @@ import { map, switchMap, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class GitHubServiceService {
-  private username = 'daniloercosta'; // Seu nome de usuário do GitHub
+  private username = 'daniloercosta';
   private apiUrl = `https://api.github.com/users/${this.username}/repos`;
 
   constructor(private http: HttpClient) {}
 
   getProjetos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl).pipe(
-      map(repos => repos.slice(0, 10)), // Pegamos apenas os 10 primeiros repositórios
-      switchMap(repos => forkJoin(repos.map(repo => this.adicionarImagemAoProjeto(repo)))) // Retorna um Observable<any[]>
+      map(repos => repos.slice(0, 10)) // top 10 repositórios
     );
   }
 
-  private adicionarImagemAoProjeto(repo: any): Observable<any> {
-    return this.buscarReadme(repo.name, 'master').pipe(
-      catchError(() => this.buscarReadme(repo.name, 'master')), // Se não encontrar no "main", tenta no "master"
+  adicionarImagemAoProjeto(repoName: string): Observable<string> {
+    return this.buscarReadme(repoName, 'master').pipe(
+      catchError(() => this.buscarReadme(repoName, 'main')),
       map(readme => {
         const imageUrl = this.extrairPrimeiraImagem(readme);
-        return {
-          ...repo,
-          imagem: imageUrl || `https://raw.githubusercontent.com/${this.username}/${repo.name}/master/projeto.png`
-        };
+        return imageUrl || `https://raw.githubusercontent.com/${this.username}/${repoName}/master/projeto.png`;
       }),
-      catchError(() => of({ ...repo, imagem: `https://raw.githubusercontent.com/${this.username}/${repo.name}/master/projeto.png` })) // Se tudo falhar, usa a imagem padrão da raiz
+      catchError(() => of(`https://raw.githubusercontent.com/${this.username}/${repoName}/master/projeto.png`))
     );
   }
 
-  // MÉTODO QUE ESTAVA FALTANDO
+  getReadme(repoName: string): Observable<string> {
+    const url = `https://raw.githubusercontent.com/${this.username}/${repoName}/master/README.md`;
+    return this.http.get(url, { responseType: 'text' }).pipe(
+      catchError(() => of(''))
+    );
+  }
+
   private buscarReadme(repoName: string, branch: string): Observable<string> {
-    const readmeUrl = `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/README.md`;
-    return this.http.get(readmeUrl, { responseType: 'text' }).pipe(
-      catchError(() => of('')) // Se não encontrar o README, retorna uma string vazia
-    );
+    const url = `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/README.md`;
+    return this.http.get(url, { responseType: 'text' });
   }
 
-  private extrairPrimeiraImagem(readme: string): string | null {
+  extrairPrimeiraImagem(readme: string): string | null {
     const regex = /!\[.*?\]\((https?:\/\/.*?\.(?:png|jpg|jpeg|gif|svg))\)/;
     const match = readme.match(regex);
     return match ? match[1] : null;
+  }
+
+  extrairDescricao(readme: string): string {
+    return readme
+      .replace(/!\[.*?\]\(.*?\)/g, '') // remove imagens
+      .replace(/[#>*`_]/g, '')         // limpa markdown simples
+      .split('\n')
+      .filter(l => l.trim().length > 30)
+      .slice(0, 3)
+      .join(' ')
+      .trim();
+  }
+
+  getPerfil(): Observable<any> {
+    const url = `https://api.github.com/users/${this.username}`;
+    return this.http.get<any>(url);
   }
 }

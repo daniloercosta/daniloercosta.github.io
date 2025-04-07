@@ -2,11 +2,19 @@
 
 <div *ngIf="repos.length > 0; else loading">
   <mat-card *ngFor="let repo of repos" class="repo-card">
+    <img *ngIf="repo.imagem" mat-card-image [src]="repo.imagem" alt="{{ repo.name }}" style="object-fit: contain; max-height: 200px;" />
+    
     <mat-card-title>{{ repo.name }}</mat-card-title>
+    
     <mat-card-content>
-      <p>{{ repo.description || 'Sem descrição' }}</p>
-      <a mat-button color="primary" [href]="repo.html_url" target="_blank">Ver no GitHub</a>
+      <p>{{ repo.readmeDescricao }}</p>
     </mat-card-content>
+
+    <mat-card-actions>
+      <a mat-button color="accent" [href]="repo.html_url" target="_blank">
+        <mat-icon>code</mat-icon> Ver no GitHub
+      </a>
+    </mat-card-actions>
   </mat-card>
 </div>
 

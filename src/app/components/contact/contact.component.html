@@ -1,8 +1,38 @@
-<mat-card>
-    <mat-card-title>Contato</mat-card-title>
-    <mat-card-content>
-      <p>Entre em contato pelo e-mail: <strong></strong></p>
-      <p>Ou me encontre no LinkedIn: <a href="https://www.linkedin.com/in/daniloercosta" target="_blank">Meu LinkedIn</a></p>
-    </mat-card-content>
-  </mat-card>
-  
+<mat-card class="contato-card">
+  <mat-card-header>
+    <mat-card-title>
+      <mat-icon color="accent">mail</mat-icon>
+      <span class="title">Contato</span>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <p>
+      <mat-icon>email</mat-icon>
+      <strong>Email:</strong>
+      <a mat-raised-button color="primary" href="mailto:daniloer.costa@gmail.com">
+        <mat-icon>send</mat-icon>
+        Enviar Email
+      </a>
+    </p>
+
+    <p>
+      <mat-icon>business_center</mat-icon>
+      <strong>LinkedIn:</strong>
+      <a href="https://www.linkedin.com/in/daniloercosta" target="_blank">
+        Meu LinkedIn
+      </a>
+    </p>
+
+    <p>
+      <mat-icon>chat</mat-icon>
+      <strong>WhatsApp:</strong>
+      <a mat-raised-button color="accent" href="https://wa.me/5519981176992" target="_blank">
+      <mat-icon>chat</mat-icon>
+      Enviar mensagem
+      </a>
+    </p>
+  </mat-card-content>
+</mat-card>

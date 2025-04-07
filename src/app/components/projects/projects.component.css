@@ -1,4 +1,20 @@
 .repo-card {
-    margin-bottom: 15px;
-  }
-  
+  margin: 16px auto;
+  /*max-width: 600px;*/
+  text-align: left;
+  transition: transform 0.3s ease;
+}
+
+.repo-card img {
+  max-width: 100%;
+  max-height: 250px; /* controla o tamanho */
+  object-fit: contain; /* mostra a imagem inteira, sem cortar */
+  display: block;
+  margin: 0 auto 10px auto; /* centraliza a imagem no card */
+}
+
+
+.repo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
