@@ -1,29 +1,40 @@
-.container {
-  height: 100vh;
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.layout-wrapper {
+  padding-bottom: 56px; 
+  box-sizing: border-box;
+}
+
+.layout-container {
+  height: 100%;
 }
 
 mat-sidenav {
   width: 220px;
-  padding: 10px;
   background: #3f51b5;
   color: white;
 }
 
-mat-nav-list a {
-  text-decoration: none;
-  color: white;
-  display: block;
-  padding: 8px 0;
-}
-
-.content {
+.main-content {
   padding: 20px;
+  overflow-y: auto;
+  height: 100%;
 }
 
-mat-grid-tile {
+/* Footer fixo */
+.fixed-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background-color: #3f51b5;
+  color: white;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 16px;
+  justify-content: center;
+  z-index: 1000;
 }
-

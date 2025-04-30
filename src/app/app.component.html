@@ -1,17 +1,21 @@
-<mat-sidenav-container class="container">
-  <mat-sidenav mode="side" opened>
-    <h3>Meu Portfólio</h3>
-    <mat-nav-list>
-      <a mat-list-item routerLink="/">🏠 Início</a>
-      <a mat-list-item routerLink="/sobre">👤 Sobre</a>
-      <a mat-list-item routerLink="/projetos">💻 Projetos</a>
-      <a mat-list-item routerLink="/contato">📩 Contato</a>
-    </mat-nav-list>
-  </mat-sidenav>
+<app-header></app-header>
 
-  <mat-sidenav-content>
-    <div class="content">
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="layout-wrapper">
+  <mat-sidenav-container class="layout-container">
+
+    <!-- Único sidenav -->
+    <mat-sidenav mode="side" opened>
+      <!-- app-nav NÃO deve conter outro <mat-sidenav> dentro -->
+      <app-nav></app-nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+</div>
+
+<app-footer class="fixed-footer"></app-footer>

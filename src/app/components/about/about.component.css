@@ -1,0 +1,25 @@
+.sobre-mim-card {
+  margin: 20px;
+  padding: 16px;
+}
+
+.title {
+  margin-left: 8px;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+mat-card-content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+mat-card-content li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+mat-card-content mat-icon {
+  margin-right: 8px;
+}

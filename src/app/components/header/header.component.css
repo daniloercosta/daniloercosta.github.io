@@ -1,0 +1,12 @@
+.app-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+mat-toolbar {
+  height: 64px;
+  background-color: #3f51b5;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

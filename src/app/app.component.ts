@@ -7,6 +7,9 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
+import { NavComponent } from './components/nav/nav.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 @Component({
@@ -19,10 +22,13 @@ import { MatIconModule } from '@angular/material/icon';
     , RouterModule
     , MatGridListModule
     , MatIconModule
+    , HeaderComponent
+    , NavComponent
+    , FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'daniloercosta.github.io';
+  title = 'Portfólio pessoal em Angular';
 }
