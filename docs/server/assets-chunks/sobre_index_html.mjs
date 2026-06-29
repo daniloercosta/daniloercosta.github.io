@@ -49,7 +49,7 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
   }
 }</style><style ng-app-id="ng">
 
-.site-header[_ngcontent-ng-c2381784579] {
+.site-header[_ngcontent-ng-c4103448664] {
   width: min(1240px, calc(100% - 2rem));
   margin: 1rem auto 0;
   padding: 1rem 1.25rem;
@@ -66,19 +66,19 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
       transparent 34%);
   box-shadow: 0 20px 50px rgba(2, 6, 23, 0.28);
 }
-.header-inner[_ngcontent-ng-c2381784579] {
+.header-inner[_ngcontent-ng-c4103448664] {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
 }
-.brand-block[_ngcontent-ng-c2381784579] {
+.brand-block[_ngcontent-ng-c4103448664] {
   display: flex;
   align-items: center;
   gap: 1rem;
   min-width: 0;
 }
-.brand-mark[_ngcontent-ng-c2381784579] {
+.brand-mark[_ngcontent-ng-c4103448664] {
   width: 3rem;
   height: 3rem;
   border-radius: 16px;
@@ -94,33 +94,33 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
   box-shadow: 0 12px 24px rgba(94, 234, 212, 0.22);
   flex: 0 0 auto;
 }
-.brand-copy[_ngcontent-ng-c2381784579] {
+.brand-copy[_ngcontent-ng-c4103448664] {
   min-width: 0;
 }
-.eyebrow[_ngcontent-ng-c2381784579] {
+.eyebrow[_ngcontent-ng-c4103448664] {
   margin: 0 0 0.25rem;
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.72rem;
   color: #7dd3fc;
 }
-.brand-copy[_ngcontent-ng-c2381784579]   h1[_ngcontent-ng-c2381784579] {
+.brand-copy[_ngcontent-ng-c4103448664]   h1[_ngcontent-ng-c4103448664] {
   margin: 0;
   font-size: clamp(1.25rem, 2vw, 1.8rem);
   line-height: 1.15;
   color: #f8fafc;
 }
-.subtitle[_ngcontent-ng-c2381784579] {
+.subtitle[_ngcontent-ng-c4103448664] {
   margin: 0.35rem 0 0;
   max-width: 58ch;
   color: #cbd5e1;
 }
-.header-actions[_ngcontent-ng-c2381784579] {
+.header-actions[_ngcontent-ng-c4103448664] {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
-.action-link[_ngcontent-ng-c2381784579] {
+.action-link[_ngcontent-ng-c4103448664] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -137,12 +137,12 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
     border-color 160ms ease,
     background 160ms ease;
 }
-.action-link[_ngcontent-ng-c2381784579]:hover {
+.action-link[_ngcontent-ng-c4103448664]:hover {
   transform: translateY(-1px);
   border-color: rgba(94, 234, 212, 0.55);
   background: rgba(15, 23, 42, 0.72);
 }
-.action-link--highlight[_ngcontent-ng-c2381784579] {
+.action-link--highlight[_ngcontent-ng-c4103448664] {
   color: #082f2b;
   background:
     linear-gradient(
@@ -152,12 +152,12 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
   border-color: transparent;
 }
 @media (max-width: 720px) {
-  .site-header[_ngcontent-ng-c2381784579] {
+  .site-header[_ngcontent-ng-c4103448664] {
     width: min(100%, calc(100% - 1rem));
     margin-top: 0.5rem;
     border-radius: 22px;
   }
-  .header-inner[_ngcontent-ng-c2381784579] {
+  .header-inner[_ngcontent-ng-c4103448664] {
     align-items: flex-start;
     flex-direction: column;
   }
@@ -230,12 +230,12 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
   }
 }</style><style ng-app-id="ng">
 
-.site-footer[_ngcontent-ng-c89632410] {
+.site-footer[_ngcontent-ng-c2691249957] {
   width: min(1240px, calc(100% - 2rem));
   margin: 0 auto 1rem;
   padding: 0 0 0.5rem;
 }
-.footer-inner[_ngcontent-ng-c89632410] {
+.footer-inner[_ngcontent-ng-c2691249957] {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -246,27 +246,27 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
   background: rgba(8, 15, 28, 0.68);
   color: #cbd5e1;
 }
-.footer-inner[_ngcontent-ng-c89632410]   p[_ngcontent-ng-c89632410] {
+.footer-inner[_ngcontent-ng-c2691249957]   p[_ngcontent-ng-c2691249957] {
   margin: 0;
 }
-.footer-links[_ngcontent-ng-c89632410] {
+.footer-links[_ngcontent-ng-c2691249957] {
   display: flex;
   flex-wrap: wrap;
   gap: 0.9rem;
 }
-.footer-links[_ngcontent-ng-c89632410]   a[_ngcontent-ng-c89632410] {
+.footer-links[_ngcontent-ng-c2691249957]   a[_ngcontent-ng-c2691249957] {
   color: #7dd3fc;
   text-decoration: none;
   font-weight: 600;
 }
-.footer-links[_ngcontent-ng-c89632410]   a[_ngcontent-ng-c89632410]:hover {
+.footer-links[_ngcontent-ng-c2691249957]   a[_ngcontent-ng-c2691249957]:hover {
   color: #5eead4;
 }
 @media (max-width: 720px) {
-  .site-footer[_ngcontent-ng-c89632410] {
+  .site-footer[_ngcontent-ng-c2691249957] {
     width: min(100%, calc(100% - 1rem));
   }
-  .footer-inner[_ngcontent-ng-c89632410] {
+  .footer-inner[_ngcontent-ng-c2691249957] {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -326,7 +326,7 @@ export default `<!DOCTYPE html><html lang="pt-BR"><head>
 }</style><style ng-app-id="ng">.mat-mdc-card{display:flex;flex-direction:column;box-sizing:border-box;position:relative;border-style:solid;border-width:0;background-color:var(--mdc-elevated-card-container-color, var(--mat-sys-surface-container-low));border-color:var(--mdc-elevated-card-container-color, var(--mat-sys-surface-container-low));border-radius:var(--mdc-elevated-card-container-shape, var(--mat-sys-corner-medium));box-shadow:var(--mdc-elevated-card-container-elevation, var(--mat-sys-level1))}.mat-mdc-card::after{position:absolute;top:0;left:0;width:100%;height:100%;border:solid 1px rgba(0,0,0,0);content:"";display:block;pointer-events:none;box-sizing:border-box;border-radius:var(--mdc-elevated-card-container-shape, var(--mat-sys-corner-medium))}.mat-mdc-card-outlined{background-color:var(--mdc-outlined-card-container-color, var(--mat-sys-surface));border-radius:var(--mdc-outlined-card-container-shape, var(--mat-sys-corner-medium));border-width:var(--mdc-outlined-card-outline-width, 1px);border-color:var(--mdc-outlined-card-outline-color, var(--mat-sys-outline-variant));box-shadow:var(--mdc-outlined-card-container-elevation, var(--mat-sys-level0))}.mat-mdc-card-outlined::after{border:none}.mdc-card__media{position:relative;box-sizing:border-box;background-repeat:no-repeat;background-position:center;background-size:cover}.mdc-card__media::before{display:block;content:""}.mdc-card__media:first-child{border-top-left-radius:inherit;border-top-right-radius:inherit}.mdc-card__media:last-child{border-bottom-left-radius:inherit;border-bottom-right-radius:inherit}.mat-mdc-card-actions{display:flex;flex-direction:row;align-items:center;box-sizing:border-box;min-height:52px;padding:8px}.mat-mdc-card-title{font-family:var(--mat-card-title-text-font, var(--mat-sys-title-large-font));line-height:var(--mat-card-title-text-line-height, var(--mat-sys-title-large-line-height));font-size:var(--mat-card-title-text-size, var(--mat-sys-title-large-size));letter-spacing:var(--mat-card-title-text-tracking, var(--mat-sys-title-large-tracking));font-weight:var(--mat-card-title-text-weight, var(--mat-sys-title-large-weight))}.mat-mdc-card-subtitle{color:var(--mat-card-subtitle-text-color, var(--mat-sys-on-surface));font-family:var(--mat-card-subtitle-text-font, var(--mat-sys-title-medium-font));line-height:var(--mat-card-subtitle-text-line-height, var(--mat-sys-title-medium-line-height));font-size:var(--mat-card-subtitle-text-size, var(--mat-sys-title-medium-size));letter-spacing:var(--mat-card-subtitle-text-tracking, var(--mat-sys-title-medium-tracking));font-weight:var(--mat-card-subtitle-text-weight, var(--mat-sys-title-medium-weight))}.mat-mdc-card-title,.mat-mdc-card-subtitle{display:block;margin:0}.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-title,.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-subtitle{padding:16px 16px 0}.mat-mdc-card-header{display:flex;padding:16px 16px 0}.mat-mdc-card-content{display:block;padding:0 16px}.mat-mdc-card-content:first-child{padding-top:16px}.mat-mdc-card-content:last-child{padding-bottom:16px}.mat-mdc-card-title-group{display:flex;justify-content:space-between;width:100%}.mat-mdc-card-avatar{height:40px;width:40px;border-radius:50%;flex-shrink:0;margin-bottom:16px;object-fit:cover}.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-subtitle,.mat-mdc-card-avatar~.mat-mdc-card-header-text .mat-mdc-card-title{line-height:normal}.mat-mdc-card-sm-image{width:80px;height:80px}.mat-mdc-card-md-image{width:112px;height:112px}.mat-mdc-card-lg-image{width:152px;height:152px}.mat-mdc-card-xl-image{width:240px;height:240px}.mat-mdc-card-subtitle~.mat-mdc-card-title,.mat-mdc-card-title~.mat-mdc-card-subtitle,.mat-mdc-card-header .mat-mdc-card-header-text .mat-mdc-card-title,.mat-mdc-card-header .mat-mdc-card-header-text .mat-mdc-card-subtitle,.mat-mdc-card-title-group .mat-mdc-card-title,.mat-mdc-card-title-group .mat-mdc-card-subtitle{padding-top:0}.mat-mdc-card-content>:last-child:not(.mat-mdc-card-footer){margin-bottom:0}.mat-mdc-card-actions-align-end{justify-content:flex-end}</style><style ng-app-id="ng">.mat-divider{display:block;margin:0;border-top-style:solid;border-top-color:var(--mat-divider-color, var(--mat-sys-outline));border-top-width:var(--mat-divider-width, 1px)}.mat-divider.mat-divider-vertical{border-top:0;border-right-style:solid;border-right-color:var(--mat-divider-color, var(--mat-sys-outline));border-right-width:var(--mat-divider-width, 1px)}.mat-divider.mat-divider-inset{margin-left:80px}[dir=rtl] .mat-divider.mat-divider-inset{margin-left:auto;margin-right:80px}</style><style ng-app-id="ng">mat-icon,mat-icon.mat-primary,mat-icon.mat-accent,mat-icon.mat-warn{color:var(--mat-icon-color, inherit)}.mat-icon{-webkit-user-select:none;user-select:none;background-repeat:no-repeat;display:inline-block;fill:currentColor;height:24px;width:24px;overflow:hidden}.mat-icon.mat-icon-inline{font-size:inherit;height:inherit;line-height:inherit;width:inherit}.mat-icon.mat-ligature-font[fontIcon]::before{content:attr(fontIcon)}[dir=rtl] .mat-icon-rtl-mirror{transform:scale(-1, 1)}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon{display:block}.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-prefix .mat-icon-button .mat-icon,.mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-icon{margin:auto}</style></head>
 <body class="mat-typography"><!--nghm--><script type="text/javascript" id="ng-event-dispatch-contract">(()=>{function p(t,n,r,o,e,i,f,m){return{eventType:t,event:n,targetElement:r,eic:o,timeStamp:e,eia:i,eirp:f,eiack:m}}function u(t){let n=[],r=e=>{n.push(e)};return{c:t,q:n,et:[],etc:[],d:r,h:e=>{r(p(e.type,e,e.target,t,Date.now()))}}}function s(t,n,r){for(let o=0;o<n.length;o++){let e=n[o];(r?t.etc:t.et).push(e),t.c.addEventListener(e,t.h,r)}}function c(t,n,r,o,e=window){let i=u(t);e._ejsas||(e._ejsas={}),e._ejsas[n]=i,s(i,r),s(i,o,!0)}window.__jsaction_bootstrap=c;})();
 </script><script>window.__jsaction_bootstrap(document.body,"ng",["click"],[]);</script>
-  <app-root ng-version="19.2.5" _nghost-ng-c271381864="" ngh="2" ng-server-context="ssg"><app-header _ngcontent-ng-c271381864="" _nghost-ng-c2381784579="" ngh="0"><header _ngcontent-ng-c2381784579="" class="site-header"><div _ngcontent-ng-c2381784579="" class="header-inner"><div _ngcontent-ng-c2381784579="" class="brand-block"><div _ngcontent-ng-c2381784579="" class="brand-mark">DC</div><div _ngcontent-ng-c2381784579="" class="brand-copy"><p _ngcontent-ng-c2381784579="" class="eyebrow">Portfólio pessoal</p><h1 _ngcontent-ng-c2381784579="">Danilo Costa</h1><p _ngcontent-ng-c2381784579="" class="subtitle">Interfaces limpas, backend sólido e foco em experiência real de produto.</p></div></div><div _ngcontent-ng-c2381784579="" class="header-actions"><a _ngcontent-ng-c2381784579="" href="https://github.com/daniloercosta" target="_blank" rel="noreferrer" class="action-link">GitHub</a><a _ngcontent-ng-c2381784579="" href="mailto:daniloer.costa@gmail.com" class="action-link action-link--highlight">Contato</a></div></div></header></app-header><div _ngcontent-ng-c271381864="" class="app-shell"><aside _ngcontent-ng-c271381864="" class="sidebar"><app-nav _ngcontent-ng-c271381864="" _nghost-ng-c2674291055="" ngh="0"><nav _ngcontent-ng-c2674291055="" class="nav-card"><div _ngcontent-ng-c2674291055="" class="nav-header"><p _ngcontent-ng-c2674291055="" class="eyebrow">Navegação</p><h2 _ngcontent-ng-c2674291055="">Seções</h2><p _ngcontent-ng-c2674291055="">Um resumo rápido do que você pode explorar no site.</p></div><div _ngcontent-ng-c2674291055="" class="nav-links"><a _ngcontent-ng-c2674291055="" routerlink="/" routerlinkactive="active-link" ng-reflect-router-link="/" ng-reflect-router-link-active="active-link" ng-reflect-router-link-active-options="[object Object]" href="/" class="" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Início</span><small _ngcontent-ng-c2674291055="">Resumo, destaque e atalho rápido.</small></a><a _ngcontent-ng-c2674291055="" routerlink="/sobre" routerlinkactive="active-link" ng-reflect-router-link="/sobre" ng-reflect-router-link-active="active-link" href="/sobre" class="active-link" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Sobre</span><small _ngcontent-ng-c2674291055="">Experiência, foco técnico e perfil.</small></a><a _ngcontent-ng-c2674291055="" routerlink="/projetos" routerlinkactive="active-link" ng-reflect-router-link="/projetos" ng-reflect-router-link-active="active-link" href="/projetos" class="" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Projetos</span><small _ngcontent-ng-c2674291055="">Repositórios e entregas recentes.</small></a><a _ngcontent-ng-c2674291055="" routerlink="/contato" routerlinkactive="active-link" ng-reflect-router-link="/contato" ng-reflect-router-link-active="active-link" href="/contato" class="" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Contato</span><small _ngcontent-ng-c2674291055="">Fale direto por e-mail ou WhatsApp.</small></a></div></nav></app-nav></aside><main _ngcontent-ng-c271381864="" class="content-surface"><router-outlet _ngcontent-ng-c271381864=""></router-outlet><app-about _nghost-ng-c3479495215="" ngh="1"><section _ngcontent-ng-c3479495215="" class="about-page"><mat-card _ngcontent-ng-c3479495215="" class="mat-mdc-card mdc-card about-card" ngh="0"><div _ngcontent-ng-c3479495215="" class="about-header"><p _ngcontent-ng-c3479495215="" class="eyebrow">Sobre mim</p><h2 _ngcontent-ng-c3479495215="">Desenvolvedor com foco em clareza, dados e boa entrega.</h2></div><mat-divider _ngcontent-ng-c3479495215="" role="separator" class="mat-divider mat-divider-horizontal" aria-orientation="horizontal" ngh="0"></mat-divider><mat-card-content _ngcontent-ng-c3479495215="" class="mat-mdc-card-content"><p _ngcontent-ng-c3479495215=""> Olá! Sou um desenvolvedor e analista de banco de dados no Brasil, apaixonado por tecnologia, produto e por construir soluções que sejam úteis de verdade. </p><p _ngcontent-ng-c3479495215=""> Minha trajetória une desenvolvimento de software, análise de dados e uma atenção forte a organização, performance e manutenção. Gosto de transformar necessidades em interfaces objetivas e sistemas confiáveis. </p><div _ngcontent-ng-c3479495215="" class="skills-grid"><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">code</mat-icon><h3 _ngcontent-ng-c3479495215="">Programação</h3><p _ngcontent-ng-c3479495215="">C#, Angular e TypeScript para aplicações modernas.</p></article><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">storage</mat-icon><h3 _ngcontent-ng-c3479495215="">Banco de dados</h3><p _ngcontent-ng-c3479495215="">Modelagem, performance e consultas mais seguras.</p></article><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">group</mat-icon><h3 _ngcontent-ng-c3479495215="">Trabalho em equipe</h3><p _ngcontent-ng-c3479495215="">Colaboração direta, comunicação clara e foco em entrega.</p></article><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">music_note</mat-icon><h3 _ngcontent-ng-c3479495215="">Além do código</h3><p _ngcontent-ng-c3479495215="">Também me inspiro em música, novas ideias e boas referências visuais.</p></article></div></mat-card-content></mat-card></section></app-about><!--container--></main></div><app-footer _ngcontent-ng-c271381864="" _nghost-ng-c89632410="" ngh="0"><footer _ngcontent-ng-c89632410="" class="site-footer"><div _ngcontent-ng-c89632410="" class="footer-inner"><p _ngcontent-ng-c89632410="">© 2026 Danilo Costa</p><div _ngcontent-ng-c89632410="" class="footer-links"><a _ngcontent-ng-c89632410="" href="https://github.com/daniloercosta" target="_blank" rel="noreferrer">GitHub</a><a _ngcontent-ng-c89632410="" href="https://www.linkedin.com/in/daniloercosta" target="_blank" rel="noreferrer">LinkedIn</a><a _ngcontent-ng-c89632410="" href="mailto:daniloer.costa@gmail.com">Email</a></div></div></footer></app-footer></app-root>
-<script src="polyfills-KIGPDB5H.js" type="module"></script><script src="scripts-3WT62KOJ.js" defer=""></script><script src="main-T4FIY3W5.js" type="module"></script>
+  <app-root ng-version="19.2.5" _nghost-ng-c271381864="" ngh="2" ng-server-context="ssg"><app-header _ngcontent-ng-c271381864="" _nghost-ng-c4103448664="" ngh="0"><header _ngcontent-ng-c4103448664="" class="site-header"><div _ngcontent-ng-c4103448664="" class="header-inner"><div _ngcontent-ng-c4103448664="" class="brand-block"><div _ngcontent-ng-c4103448664="" class="brand-mark">DC</div><div _ngcontent-ng-c4103448664="" class="brand-copy"><p _ngcontent-ng-c4103448664="" class="eyebrow">Portfólio pessoal</p><h1 _ngcontent-ng-c4103448664="">Danilo Costa</h1><p _ngcontent-ng-c4103448664="" class="subtitle">Interfaces limpas, backend sólido e foco em experiência real de produto.</p></div></div><div _ngcontent-ng-c4103448664="" class="header-actions"><a _ngcontent-ng-c4103448664="" href="https://github.com/daniloercosta" target="_blank" rel="noreferrer" class="action-link">GitHub</a><a _ngcontent-ng-c4103448664="" href="mailto:danilocostaa50@gmail.com" class="action-link action-link--highlight">Contato</a></div></div></header></app-header><div _ngcontent-ng-c271381864="" class="app-shell"><aside _ngcontent-ng-c271381864="" class="sidebar"><app-nav _ngcontent-ng-c271381864="" _nghost-ng-c2674291055="" ngh="0"><nav _ngcontent-ng-c2674291055="" class="nav-card"><div _ngcontent-ng-c2674291055="" class="nav-header"><p _ngcontent-ng-c2674291055="" class="eyebrow">Navegação</p><h2 _ngcontent-ng-c2674291055="">Seções</h2><p _ngcontent-ng-c2674291055="">Um resumo rápido do que você pode explorar no site.</p></div><div _ngcontent-ng-c2674291055="" class="nav-links"><a _ngcontent-ng-c2674291055="" routerlink="/" routerlinkactive="active-link" ng-reflect-router-link="/" ng-reflect-router-link-active="active-link" ng-reflect-router-link-active-options="[object Object]" href="/" class="" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Início</span><small _ngcontent-ng-c2674291055="">Resumo, destaque e atalho rápido.</small></a><a _ngcontent-ng-c2674291055="" routerlink="/sobre" routerlinkactive="active-link" ng-reflect-router-link="/sobre" ng-reflect-router-link-active="active-link" href="/sobre" class="active-link" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Sobre</span><small _ngcontent-ng-c2674291055="">Experiência, foco técnico e perfil.</small></a><a _ngcontent-ng-c2674291055="" routerlink="/projetos" routerlinkactive="active-link" ng-reflect-router-link="/projetos" ng-reflect-router-link-active="active-link" href="/projetos" class="" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Projetos</span><small _ngcontent-ng-c2674291055="">Repositórios e entregas recentes.</small></a><a _ngcontent-ng-c2674291055="" routerlink="/contato" routerlinkactive="active-link" ng-reflect-router-link="/contato" ng-reflect-router-link-active="active-link" href="/contato" class="" jsaction="click:;"><span _ngcontent-ng-c2674291055="">Contato</span><small _ngcontent-ng-c2674291055="">Fale direto por e-mail ou WhatsApp.</small></a></div></nav></app-nav></aside><main _ngcontent-ng-c271381864="" class="content-surface"><router-outlet _ngcontent-ng-c271381864=""></router-outlet><app-about _nghost-ng-c3479495215="" ngh="1"><section _ngcontent-ng-c3479495215="" class="about-page"><mat-card _ngcontent-ng-c3479495215="" class="mat-mdc-card mdc-card about-card" ngh="0"><div _ngcontent-ng-c3479495215="" class="about-header"><p _ngcontent-ng-c3479495215="" class="eyebrow">Sobre mim</p><h2 _ngcontent-ng-c3479495215="">Desenvolvedor com foco em clareza, dados e boa entrega.</h2></div><mat-divider _ngcontent-ng-c3479495215="" role="separator" class="mat-divider mat-divider-horizontal" aria-orientation="horizontal" ngh="0"></mat-divider><mat-card-content _ngcontent-ng-c3479495215="" class="mat-mdc-card-content"><p _ngcontent-ng-c3479495215=""> Olá! Sou um desenvolvedor e analista de banco de dados no Brasil, apaixonado por tecnologia, produto e por construir soluções que sejam úteis de verdade. </p><p _ngcontent-ng-c3479495215=""> Minha trajetória une desenvolvimento de software, análise de dados e uma atenção forte a organização, performance e manutenção. Gosto de transformar necessidades em interfaces objetivas e sistemas confiáveis. </p><div _ngcontent-ng-c3479495215="" class="skills-grid"><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">code</mat-icon><h3 _ngcontent-ng-c3479495215="">Programação</h3><p _ngcontent-ng-c3479495215="">C#, Angular e TypeScript para aplicações modernas.</p></article><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">storage</mat-icon><h3 _ngcontent-ng-c3479495215="">Banco de dados</h3><p _ngcontent-ng-c3479495215="">Modelagem, performance e consultas mais seguras.</p></article><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">group</mat-icon><h3 _ngcontent-ng-c3479495215="">Trabalho em equipe</h3><p _ngcontent-ng-c3479495215="">Colaboração direta, comunicação clara e foco em entrega.</p></article><article _ngcontent-ng-c3479495215=""><mat-icon _ngcontent-ng-c3479495215="" role="img" class="mat-icon notranslate material-icons mat-ligature-font mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font" ngh="0">music_note</mat-icon><h3 _ngcontent-ng-c3479495215="">Além do código</h3><p _ngcontent-ng-c3479495215="">Também me inspiro em música, novas ideias e boas referências visuais.</p></article></div></mat-card-content></mat-card></section></app-about><!--container--></main></div><app-footer _ngcontent-ng-c271381864="" _nghost-ng-c2691249957="" ngh="0"><footer _ngcontent-ng-c2691249957="" class="site-footer"><div _ngcontent-ng-c2691249957="" class="footer-inner"><p _ngcontent-ng-c2691249957="">© 2026 Danilo Costa</p><div _ngcontent-ng-c2691249957="" class="footer-links"><a _ngcontent-ng-c2691249957="" href="https://github.com/daniloercosta" target="_blank" rel="noreferrer">GitHub</a><a _ngcontent-ng-c2691249957="" href="https://www.linkedin.com/in/daniloercosta" target="_blank" rel="noreferrer">LinkedIn</a><a _ngcontent-ng-c2691249957="" href="mailto:danilocostaa50@gmail.com">Email</a></div></div></footer></app-footer></app-root>
+<script src="polyfills-KIGPDB5H.js" type="module"></script><script src="scripts-3WT62KOJ.js" defer=""></script><script src="main-HLCFHBLS.js" type="module"></script>
 
 <script id="ng-state" type="application/json">{"__nghData__":[{},{"n":{"2":"1f","16":"15f","23":"22f","30":"29f","37":"36f"}},{"c":{"5":[{"i":"c3479495215","r":1}]}}]}</script></body></html>`;

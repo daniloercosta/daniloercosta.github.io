@@ -11,6 +11,7 @@ import { GitHubRepo, GitHubServiceService } from '../../services/git-hub-service
 
 type ProjectDetailViewModel = GitHubRepo & {
   imagem: string;
+  imagemFallback: string;
   descricaoCompleta: string;
   readme: string;
   topicos: string[];
@@ -63,6 +64,7 @@ export class ProjectDetailComponent implements OnInit {
       this.projeto = {
         ...repo,
         imagem,
+        imagemFallback: this.githubService.getFallbackImagemProjeto(repo.name, repo.language),
         readme,
         topicos: repo.topics || [],
         descricaoCompleta:

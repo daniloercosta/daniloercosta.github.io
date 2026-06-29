@@ -73,12 +73,14 @@ export class HomeComponent implements OnInit {
     this.projetos = await Promise.all(
       selecionados.map(async repo => {
         const imagem = await firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
+        const imagemFallback = this.githubService.getFallbackImagemProjeto(repo.name, repo.language);
 
         return {
           id: repo.name,
           nome: repo.name,
           descricao: repo.description?.trim() || 'Projeto disponível no GitHub.',
           imagem,
+          imagemFallback,
           url: repo.html_url,
           linguagem: repo.language || 'Código',
           estrelas: repo.stargazers_count

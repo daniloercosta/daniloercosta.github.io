@@ -68377,7 +68377,7 @@ var FooterComponent = class _FooterComponent {
   static \u0275fac = function FooterComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _FooterComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FooterComponent, selectors: [["app-footer"]], decls: 11, vars: 1, consts: [[1, "site-footer"], [1, "footer-inner"], [1, "footer-links"], ["href", "https://github.com/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["href", "https://www.linkedin.com/in/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["href", "mailto:daniloer.costa@gmail.com"]], template: function FooterComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _FooterComponent, selectors: [["app-footer"]], decls: 11, vars: 1, consts: [[1, "site-footer"], [1, "footer-inner"], [1, "footer-links"], ["href", "https://github.com/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["href", "https://www.linkedin.com/in/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["href", "mailto:danilocostaa50@gmail.com"]], template: function FooterComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "footer", 0)(1, "div", 1)(2, "p");
       \u0275\u0275text(3);
@@ -68407,7 +68407,7 @@ var HeaderComponent = class _HeaderComponent {
   static \u0275fac = function HeaderComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _HeaderComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeaderComponent, selectors: [["app-header"]], decls: 17, vars: 0, consts: [[1, "site-header"], [1, "header-inner"], [1, "brand-block"], [1, "brand-mark"], [1, "brand-copy"], [1, "eyebrow"], [1, "subtitle"], [1, "header-actions"], ["href", "https://github.com/daniloercosta", "target", "_blank", "rel", "noreferrer", 1, "action-link"], ["href", "mailto:daniloer.costa@gmail.com", 1, "action-link", "action-link--highlight"]], template: function HeaderComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HeaderComponent, selectors: [["app-header"]], decls: 17, vars: 0, consts: [[1, "site-header"], [1, "header-inner"], [1, "brand-block"], [1, "brand-mark"], [1, "brand-copy"], [1, "eyebrow"], [1, "subtitle"], [1, "header-actions"], ["href", "https://github.com/daniloercosta", "target", "_blank", "rel", "noreferrer", 1, "action-link"], ["href", "mailto:danilocostaa50@gmail.com", 1, "action-link", "action-link--highlight"]], template: function HeaderComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "header", 0)(1, "div", 1)(2, "div", 2)(3, "div", 3);
       \u0275\u0275text(4, "DC");
@@ -80882,7 +80882,11 @@ var GitHubServiceService = class _GitHubServiceService {
     return this.buscarReadme(repoName, "main").pipe(catchError(() => this.buscarReadme(repoName, "master")), catchError(() => of("")));
   }
   adicionarImagemAoProjeto(repoName) {
-    return of(`https://opengraph.githubassets.com/1/${this.username}/${repoName}`).pipe(catchError(() => of(this.defaultProjectImage)));
+    return of(`https://opengraph.githubassets.com/1/${this.username}/${repoName}`);
+  }
+  getFallbackImagemProjeto(repoName, language) {
+    const label = this.criarImagemProjetoSvg(repoName, language);
+    return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(label)}`;
   }
   extrairPrimeiraImagem(readme) {
     const regex = /!\[.*?\]\((https?:\/\/.*?\.(?:png|jpg|jpeg|gif|svg))\)/i;
@@ -80896,6 +80900,56 @@ var GitHubServiceService = class _GitHubServiceService {
     const url = `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/README.md`;
     return this.http.get(url, { responseType: "text" });
   }
+  criarImagemProjetoSvg(repoName, language) {
+    const title = this.apenasIniciais(repoName);
+    const subtitle = language || "GitHub repo";
+    const palette = this.coresParaRepositorio(repoName);
+    return `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-label="${repoName}">
+        <defs>
+          <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${palette[0]}" />
+            <stop offset="100%" stop-color="${palette[1]}" />
+          </linearGradient>
+          <radialGradient id="glow" cx="20%" cy="20%" r="80%">
+            <stop offset="0%" stop-color="rgba(255,255,255,0.25)" />
+            <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+          </radialGradient>
+        </defs>
+        <rect width="1200" height="675" rx="48" fill="url(#bg)" />
+        <circle cx="170" cy="130" r="210" fill="url(#glow)" />
+        <circle cx="1040" cy="560" r="180" fill="rgba(255,255,255,0.08)" />
+        <rect x="72" y="72" width="180" height="56" rx="28" fill="rgba(255,255,255,0.16)" />
+        <text x="102" y="109" fill="white" font-size="24" font-family="Arial, Helvetica, sans-serif" font-weight="700">Danilo Costa</text>
+        <text x="72" y="520" fill="rgba(255,255,255,0.72)" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700">${this.escaparSvg(subtitle)}</text>
+        <text x="72" y="592" fill="white" font-size="76" font-family="Arial, Helvetica, sans-serif" font-weight="800">${this.escaparSvg(this.truncarTitulo(repoName))}</text>
+        <text x="74" y="636" fill="rgba(255,255,255,0.82)" font-size="26" font-family="Arial, Helvetica, sans-serif">Portf\xF3lio t\xE9cnico e visual mais limpo</text>
+        <rect x="900" y="72" width="228" height="228" rx="38" fill="rgba(255,255,255,0.12)" />
+        <text x="1020" y="195" text-anchor="middle" fill="white" font-size="96" font-family="Arial, Helvetica, sans-serif" font-weight="800">${this.escaparSvg(title)}</text>
+      </svg>
+    `.trim();
+  }
+  coresParaRepositorio(repoName) {
+    const hash = [...repoName].reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const palettes = [
+      ["#0f172a", "#0ea5e9"],
+      ["#111827", "#14b8a6"],
+      ["#1e1b4b", "#8b5cf6"],
+      ["#052e16", "#22c55e"],
+      ["#3b0764", "#ec4899"],
+      ["#4c1d95", "#f59e0b"]
+    ];
+    return palettes[hash % palettes.length];
+  }
+  apenasIniciais(repoName) {
+    return repoName.split(/[-_.\s]+/).filter(Boolean).map((part) => part[0]).slice(0, 2).join("").toUpperCase() || "DC";
+  }
+  truncarTitulo(repoName) {
+    return repoName.replace(/[-_.]+/g, " ").slice(0, 28);
+  }
+  escaparSvg(text) {
+    return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
+  }
   static \u0275fac = function GitHubServiceService_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _GitHubServiceService)(\u0275\u0275inject(HttpClient));
   };
@@ -80906,9 +80960,13 @@ var GitHubServiceService = class _GitHubServiceService {
 var _c07 = (a0) => ["/projetos", a0];
 function HomeComponent_div_59_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 22)(1, "mat-card", 23)(2, "div", 24);
-    \u0275\u0275element(3, "img", 25);
-    \u0275\u0275elementEnd();
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 22)(1, "mat-card", 23)(2, "div", 24)(3, "img", 25);
+    \u0275\u0275listener("error", function HomeComponent_div_59_Template_img_error_3_listener() {
+      const projeto_r2 = \u0275\u0275restoreView(_r1).$implicit;
+      return \u0275\u0275resetView(projeto_r2.imagem = projeto_r2.imagemFallback);
+    });
+    \u0275\u0275elementEnd()();
     \u0275\u0275elementStart(4, "mat-card-content")(5, "div", 26)(6, "span");
     \u0275\u0275text(7);
     \u0275\u0275elementEnd();
@@ -80928,19 +80986,19 @@ function HomeComponent_div_59_Template(rf, ctx) {
     \u0275\u0275elementEnd()()()();
   }
   if (rf & 2) {
-    const projeto_r1 = ctx.$implicit;
+    const projeto_r2 = ctx.$implicit;
     \u0275\u0275advance(3);
-    \u0275\u0275property("src", projeto_r1.imagem, \u0275\u0275sanitizeUrl)("alt", projeto_r1.nome);
+    \u0275\u0275property("src", projeto_r2.imagem, \u0275\u0275sanitizeUrl)("alt", projeto_r2.nome);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(projeto_r1.linguagem);
+    \u0275\u0275textInterpolate(projeto_r2.linguagem);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("", projeto_r1.estrelas, " estrelas");
+    \u0275\u0275textInterpolate1("", projeto_r2.estrelas, " estrelas");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(projeto_r1.nome);
+    \u0275\u0275textInterpolate(projeto_r2.nome);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(projeto_r1.descricao);
+    \u0275\u0275textInterpolate(projeto_r2.descricao);
     \u0275\u0275advance(2);
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction1(7, _c07, projeto_r1.id));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction1(7, _c07, projeto_r2.id));
   }
 }
 var HomeComponent = class _HomeComponent {
@@ -80987,11 +81045,13 @@ var HomeComponent = class _HomeComponent {
       const selecionados = projetos.slice().sort(() => Math.random() - 0.5).slice(0, 6);
       this.projetos = yield Promise.all(selecionados.map((repo) => __async(this, null, function* () {
         const imagem = yield firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
+        const imagemFallback = this.githubService.getFallbackImagemProjeto(repo.name, repo.language);
         return {
           id: repo.name,
           nome: repo.name,
           descricao: repo.description?.trim() || "Projeto dispon\xEDvel no GitHub.",
           imagem,
+          imagemFallback,
           url: repo.html_url,
           linguagem: repo.language || "C\xF3digo",
           estrelas: repo.stargazers_count
@@ -81007,7 +81067,7 @@ var HomeComponent = class _HomeComponent {
   static \u0275fac = function HomeComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _HomeComponent)(\u0275\u0275directiveInject(GitHubServiceService), \u0275\u0275directiveInject(PLATFORM_ID));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HomeComponent, selectors: [["app-home"]], decls: 88, vars: 7, consts: [[1, "home-hero"], [1, "hero-copy"], [1, "eyebrow"], [1, "lead"], [1, "hero-actions"], ["mat-raised-button", "", "color", "primary", "href", "https://github.com/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["mat-stroked-button", "", "color", "accent", "routerLink", "/projetos"], [1, "hero-metrics"], [1, "profile-card"], [1, "profile-top"], ["alt", "Foto de Danilo Costa", 1, "avatar", 3, "src"], [1, "profile-links"], ["mat-button", "", "color", "primary", "target", "_blank", "rel", "noreferrer", 3, "href"], ["mat-button", "", "color", "accent", "href", "mailto:daniloer.costa@gmail.com"], [1, "section-block"], [1, "section-heading"], [1, "carousel", 3, "config"], ["ngxSlickItem", "", "class", "carousel-item", 4, "ngFor", "ngForOf"], [1, "section-block", "grid-two"], [1, "info-card"], [1, "tags"], ["mat-raised-button", "", "color", "accent", "href", "mailto:daniloer.costa@gmail.com"], ["ngxSlickItem", "", 1, "carousel-item"], [1, "project-card"], [1, "project-image-wrap"], [3, "src", "alt"], [1, "project-meta"], ["mat-stroked-button", "", "color", "primary", 3, "routerLink"]], template: function HomeComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _HomeComponent, selectors: [["app-home"]], decls: 88, vars: 7, consts: [[1, "home-hero"], [1, "hero-copy"], [1, "eyebrow"], [1, "lead"], [1, "hero-actions"], ["mat-raised-button", "", "color", "primary", "href", "https://github.com/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["mat-stroked-button", "", "color", "accent", "routerLink", "/projetos"], [1, "hero-metrics"], [1, "profile-card"], [1, "profile-top"], ["alt", "Foto de Danilo Costa", 1, "avatar", 3, "src"], [1, "profile-links"], ["mat-button", "", "color", "primary", "target", "_blank", "rel", "noreferrer", 3, "href"], ["mat-button", "", "color", "accent", "href", "mailto:danilocostaa50@gmail.com"], [1, "section-block"], [1, "section-heading"], [1, "carousel", 3, "config"], ["ngxSlickItem", "", "class", "carousel-item", 4, "ngFor", "ngForOf"], [1, "section-block", "grid-two"], [1, "info-card"], [1, "tags"], ["mat-raised-button", "", "color", "accent", "href", "mailto:danilocostaa50@gmail.com"], ["ngxSlickItem", "", 1, "carousel-item"], [1, "project-card"], [1, "project-image-wrap"], [3, "error", "src", "alt"], [1, "project-meta"], ["mat-stroked-button", "", "color", "primary", 3, "routerLink"]], template: function HomeComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "section", 0)(1, "div", 1)(2, "p", 2);
       \u0275\u0275text(3, "Desenvolvimento \xB7 Dados \xB7 Produto");
@@ -81298,9 +81358,9 @@ function ProjectDetailComponent_ng_container_5_ng_container_1_div_9_span_1_Templ
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const topico_r1 = ctx.$implicit;
+    const topico_r2 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(topico_r1);
+    \u0275\u0275textInterpolate(topico_r2);
   }
 }
 function ProjectDetailComponent_ng_container_5_ng_container_1_div_9_Template(rf, ctx) {
@@ -81310,9 +81370,9 @@ function ProjectDetailComponent_ng_container_5_ng_container_1_div_9_Template(rf,
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
+    const ctx_r2 = \u0275\u0275nextContext(3);
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.projeto.topicos);
+    \u0275\u0275property("ngForOf", ctx_r2.projeto.topicos);
   }
 }
 function ProjectDetailComponent_ng_container_5_ng_container_1_mat_card_70_Template(rf, ctx) {
@@ -81328,13 +81388,14 @@ function ProjectDetailComponent_ng_container_5_ng_container_1_mat_card_70_Templa
     \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(3);
+    const ctx_r2 = \u0275\u0275nextContext(3);
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(ctx_r1.projeto.readme);
+    \u0275\u0275textInterpolate(ctx_r2.projeto.readme);
   }
 }
 function ProjectDetailComponent_ng_container_5_ng_container_1_Template(rf, ctx) {
   if (rf & 1) {
+    const _r1 = \u0275\u0275getCurrentView();
     \u0275\u0275elementContainerStart(0);
     \u0275\u0275elementStart(1, "div", 5)(2, "div", 6)(3, "p", 7);
     \u0275\u0275text(4, "Detalhe do projeto");
@@ -81356,8 +81417,13 @@ function ProjectDetailComponent_ng_container_5_ng_container_1_Template(rf, ctx) 
     \u0275\u0275elementEnd();
     \u0275\u0275text(18, " Acesso ao projeto ");
     \u0275\u0275elementEnd()()();
-    \u0275\u0275elementStart(19, "mat-card", 13);
-    \u0275\u0275element(20, "img", 14);
+    \u0275\u0275elementStart(19, "mat-card", 13)(20, "img", 14);
+    \u0275\u0275listener("error", function ProjectDetailComponent_ng_container_5_ng_container_1_Template_img_error_20_listener() {
+      \u0275\u0275restoreView(_r1);
+      const ctx_r2 = \u0275\u0275nextContext(2);
+      return \u0275\u0275resetView(ctx_r2.projeto.imagem = ctx_r2.projeto.imagemFallback);
+    });
+    \u0275\u0275elementEnd();
     \u0275\u0275elementStart(21, "div", 15)(22, "article")(23, "strong");
     \u0275\u0275text(24);
     \u0275\u0275elementEnd();
@@ -81418,37 +81484,37 @@ function ProjectDetailComponent_ng_container_5_ng_container_1_Template(rf, ctx) 
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext(2);
+    const ctx_r2 = \u0275\u0275nextContext(2);
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(ctx_r1.projeto.name);
+    \u0275\u0275textInterpolate(ctx_r2.projeto.name);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(ctx_r1.projeto.descricaoCompleta);
+    \u0275\u0275textInterpolate(ctx_r2.projeto.descricaoCompleta);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.projeto.topicos == null ? null : ctx_r1.projeto.topicos.length);
+    \u0275\u0275property("ngIf", ctx_r2.projeto.topicos == null ? null : ctx_r2.projeto.topicos.length);
     \u0275\u0275advance(2);
-    \u0275\u0275property("href", ctx_r1.projeto.html_url, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("href", ctx_r2.projeto.html_url, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance(4);
-    \u0275\u0275property("href", ctx_r1.projeto.homepage || ctx_r1.projeto.html_url, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("href", ctx_r2.projeto.homepage || ctx_r2.projeto.html_url, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance(5);
-    \u0275\u0275property("src", ctx_r1.projeto.imagem, \u0275\u0275sanitizeUrl)("alt", ctx_r1.projeto.name);
+    \u0275\u0275property("src", ctx_r2.projeto.imagem, \u0275\u0275sanitizeUrl)("alt", ctx_r2.projeto.name);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(ctx_r1.projeto.language || "C\xF3digo");
+    \u0275\u0275textInterpolate(ctx_r2.projeto.language || "C\xF3digo");
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(ctx_r1.projeto.stargazers_count);
+    \u0275\u0275textInterpolate(ctx_r2.projeto.stargazers_count);
     \u0275\u0275advance(5);
-    \u0275\u0275textInterpolate(ctx_r1.projeto.forks_count || 0);
+    \u0275\u0275textInterpolate(ctx_r2.projeto.forks_count || 0);
     \u0275\u0275advance(10);
-    \u0275\u0275textInterpolate(ctx_r1.resumo);
+    \u0275\u0275textInterpolate(ctx_r2.resumo);
     \u0275\u0275advance();
-    \u0275\u0275property("href", ctx_r1.projeto.homepage || ctx_r1.projeto.html_url, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("href", ctx_r2.projeto.homepage || ctx_r2.projeto.html_url, \u0275\u0275sanitizeUrl);
     \u0275\u0275advance(12);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(58, 16, ctx_r1.projeto.updated_at, "dd/MM/yyyy"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(58, 16, ctx_r2.projeto.updated_at, "dd/MM/yyyy"));
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(64, 19, ctx_r1.projeto.created_at, "dd/MM/yyyy"));
+    \u0275\u0275textInterpolate(\u0275\u0275pipeBind2(64, 19, ctx_r2.projeto.created_at, "dd/MM/yyyy"));
     \u0275\u0275advance(6);
-    \u0275\u0275textInterpolate(ctx_r1.projeto.open_issues_count || 0);
+    \u0275\u0275textInterpolate(ctx_r2.projeto.open_issues_count || 0);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.projeto.readme);
+    \u0275\u0275property("ngIf", ctx_r2.projeto.readme);
   }
 }
 function ProjectDetailComponent_ng_container_5_Template(rf, ctx) {
@@ -81458,10 +81524,10 @@ function ProjectDetailComponent_ng_container_5_Template(rf, ctx) {
     \u0275\u0275elementContainerEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
-    const errorState_r3 = \u0275\u0275reference(9);
+    const ctx_r2 = \u0275\u0275nextContext();
+    const errorState_r4 = \u0275\u0275reference(9);
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", ctx_r1.projeto)("ngIfElse", errorState_r3);
+    \u0275\u0275property("ngIf", ctx_r2.projeto)("ngIfElse", errorState_r4);
   }
 }
 function ProjectDetailComponent_ng_template_6_Template(rf, ctx) {
@@ -81478,9 +81544,9 @@ function ProjectDetailComponent_ng_template_8_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
+    const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275textInterpolate(ctx_r1.erro);
+    \u0275\u0275textInterpolate(ctx_r2.erro);
   }
 }
 var ProjectDetailComponent = class _ProjectDetailComponent {
@@ -81517,6 +81583,7 @@ var ProjectDetailComponent = class _ProjectDetailComponent {
         ]);
         this.projeto = __spreadProps(__spreadValues({}, repo), {
           imagem,
+          imagemFallback: this.githubService.getFallbackImagemProjeto(repo.name, repo.language),
           readme,
           topicos: repo.topics || [],
           descricaoCompleta: repo.description?.trim() || this.githubService.extrairDescricao(readme) || "Projeto sem descri\xE7\xE3o detalhada dispon\xEDvel."
@@ -81532,7 +81599,7 @@ var ProjectDetailComponent = class _ProjectDetailComponent {
   static \u0275fac = function ProjectDetailComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ProjectDetailComponent)(\u0275\u0275directiveInject(ActivatedRoute), \u0275\u0275directiveInject(GitHubServiceService), \u0275\u0275directiveInject(PLATFORM_ID));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProjectDetailComponent, selectors: [["app-project-detail"]], decls: 10, vars: 2, consts: [["loadingState", ""], ["errorState", ""], [1, "project-detail"], ["routerLink", "/projetos", 1, "back-link"], [4, "ngIf", "ngIfElse"], [1, "hero"], [1, "hero-copy"], [1, "eyebrow"], [1, "lead"], ["class", "topic-row", 4, "ngIf"], [1, "hero-actions"], ["mat-raised-button", "", "color", "primary", "target", "_blank", "rel", "noreferrer", 3, "href"], ["mat-stroked-button", "", "color", "accent", "target", "_blank", "rel", "noreferrer", 3, "href"], [1, "hero-card"], [1, "hero-image", 3, "src", "alt"], [1, "hero-stats"], [1, "info-grid"], [1, "info-card"], ["target", "_blank", "rel", "noreferrer", 1, "inline-link", 3, "href"], ["class", "readme-card", 4, "ngIf"], [1, "topic-row"], [4, "ngFor", "ngForOf"], [1, "readme-card"], [1, "state-card"]], template: function ProjectDetailComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProjectDetailComponent, selectors: [["app-project-detail"]], decls: 10, vars: 2, consts: [["loadingState", ""], ["errorState", ""], [1, "project-detail"], ["routerLink", "/projetos", 1, "back-link"], [4, "ngIf", "ngIfElse"], [1, "hero"], [1, "hero-copy"], [1, "eyebrow"], [1, "lead"], ["class", "topic-row", 4, "ngIf"], [1, "hero-actions"], ["mat-raised-button", "", "color", "primary", "target", "_blank", "rel", "noreferrer", 3, "href"], ["mat-stroked-button", "", "color", "accent", "target", "_blank", "rel", "noreferrer", 3, "href"], [1, "hero-card"], [1, "hero-image", 3, "error", "src", "alt"], [1, "hero-stats"], [1, "info-grid"], [1, "info-card"], ["target", "_blank", "rel", "noreferrer", 1, "inline-link", 3, "href"], ["class", "readme-card", 4, "ngIf"], [1, "topic-row"], [4, "ngFor", "ngForOf"], [1, "readme-card"], [1, "state-card"]], template: function ProjectDetailComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "section", 2)(1, "a", 3)(2, "mat-icon");
       \u0275\u0275text(3, "arrow_back");
@@ -81544,28 +81611,33 @@ var ProjectDetailComponent = class _ProjectDetailComponent {
       \u0275\u0275template(6, ProjectDetailComponent_ng_template_6_Template, 2, 0, "ng-template", null, 0, \u0275\u0275templateRefExtractor)(8, ProjectDetailComponent_ng_template_8_Template, 2, 1, "ng-template", null, 1, \u0275\u0275templateRefExtractor);
     }
     if (rf & 2) {
-      const loadingState_r4 = \u0275\u0275reference(7);
+      const loadingState_r5 = \u0275\u0275reference(7);
       \u0275\u0275advance(5);
-      \u0275\u0275property("ngIf", !ctx.carregando)("ngIfElse", loadingState_r4);
+      \u0275\u0275property("ngIf", !ctx.carregando)("ngIfElse", loadingState_r5);
     }
   }, dependencies: [CommonModule, NgForOf, NgIf, DatePipe, MatButtonModule, MatAnchor, MatCardModule, MatCard, MatIconModule, MatIcon, RouterLink], styles: ['\n\n.project-detail[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 1.25rem;\n}\n.back-link[_ngcontent-%COMP%] {\n  display: inline-flex;\n  align-items: center;\n  gap: 0.35rem;\n  width: fit-content;\n  color: #7dd3fc;\n  text-decoration: none;\n  font-weight: 700;\n}\n.hero[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.9fr);\n  gap: 1rem;\n}\n.hero-copy[_ngcontent-%COMP%], \n.hero-card[_ngcontent-%COMP%], \n.info-card[_ngcontent-%COMP%], \n.readme-card[_ngcontent-%COMP%], \n.state-card[_ngcontent-%COMP%] {\n  border-radius: 24px;\n  border: 1px solid rgba(148, 163, 184, 0.16);\n  background: rgba(8, 15, 28, 0.86);\n}\n.hero-copy[_ngcontent-%COMP%] {\n  padding: 1rem 0.25rem;\n}\n.eyebrow[_ngcontent-%COMP%] {\n  margin: 0;\n  text-transform: uppercase;\n  letter-spacing: 0.18em;\n  font-size: 0.72rem;\n  color: #7dd3fc;\n}\n.hero-copy[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  margin: 0.45rem 0 0;\n  font-family: "Space Grotesk", sans-serif;\n  font-size: clamp(2rem, 4vw, 3.6rem);\n  line-height: 1;\n}\n.lead[_ngcontent-%COMP%] {\n  margin: 1rem 0 0;\n  max-width: 60ch;\n  color: #cbd5e1;\n  line-height: 1.75;\n}\n.hero-actions[_ngcontent-%COMP%] {\n  display: flex;\n  gap: 0.75rem;\n  flex-wrap: wrap;\n  margin-top: 1.4rem;\n}\n.topic-row[_ngcontent-%COMP%] {\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.6rem;\n  margin-top: 1rem;\n}\n.topic-row[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  padding: 0.5rem 0.75rem;\n  border-radius: 999px;\n  border: 1px solid rgba(125, 211, 252, 0.18);\n  background: rgba(15, 23, 42, 0.45);\n  color: #e2e8f0;\n  font-size: 0.85rem;\n  font-weight: 700;\n}\n.hero-card[_ngcontent-%COMP%] {\n  overflow: hidden;\n  padding: 0.85rem;\n}\n.hero-image[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 240px;\n  object-fit: cover;\n  border-radius: 18px;\n}\n.hero-stats[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(3, minmax(0, 1fr));\n  gap: 0.75rem;\n  margin-top: 0.85rem;\n}\n.hero-stats[_ngcontent-%COMP%]   article[_ngcontent-%COMP%], \n.info-card[_ngcontent-%COMP%]   li[_ngcontent-%COMP%], \n.state-card[_ngcontent-%COMP%] {\n  padding: 0.95rem;\n  border-radius: 18px;\n  background: rgba(15, 23, 42, 0.45);\n  border: 1px solid rgba(148, 163, 184, 0.14);\n}\n.hero-stats[_ngcontent-%COMP%]   strong[_ngcontent-%COMP%] {\n  display: block;\n  font-size: 1.05rem;\n}\n.hero-stats[_ngcontent-%COMP%]   span[_ngcontent-%COMP%], \n.info-card[_ngcontent-%COMP%]   li[_ngcontent-%COMP%]   span[_ngcontent-%COMP%] {\n  color: #94a3b8;\n}\n.info-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 1rem;\n}\n.info-card[_ngcontent-%COMP%], \n.readme-card[_ngcontent-%COMP%] {\n  padding: 1.15rem;\n}\n.info-card[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%], \n.readme-card[_ngcontent-%COMP%]   h3[_ngcontent-%COMP%] {\n  margin: 0.3rem 0 1rem;\n}\n.info-card[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  color: #cbd5e1;\n  line-height: 1.75;\n}\n.inline-link[_ngcontent-%COMP%] {\n  display: inline-flex;\n  margin-top: 0.25rem;\n  color: #7dd3fc;\n  font-weight: 700;\n  text-decoration: none;\n}\n.inline-link[_ngcontent-%COMP%]:hover {\n  color: #5eead4;\n}\n.info-card[_ngcontent-%COMP%]   ul[_ngcontent-%COMP%] {\n  list-style: none;\n  padding: 0;\n  margin: 0;\n  display: grid;\n  gap: 0.75rem;\n}\n.info-card[_ngcontent-%COMP%]   li[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 0.25rem;\n}\n.info-card[_ngcontent-%COMP%]   strong[_ngcontent-%COMP%] {\n  font-size: 1rem;\n}\n.readme-card[_ngcontent-%COMP%]   pre[_ngcontent-%COMP%] {\n  margin: 0;\n  white-space: pre-wrap;\n  word-break: break-word;\n  color: #e2e8f0;\n  font-family: inherit;\n  line-height: 1.75;\n}\n.state-card[_ngcontent-%COMP%] {\n  color: #e2e8f0;\n}\n@media (max-width: 900px) {\n  .hero[_ngcontent-%COMP%], \n   .info-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n  .hero-stats[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n}'] });
 };
 (() => {
-  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProjectDetailComponent, { className: "ProjectDetailComponent", filePath: "src/app/components/project-detail/project-detail.component.ts", lineNumber: 26 });
+  (typeof ngDevMode === "undefined" || ngDevMode) && \u0275setClassDebugInfo(ProjectDetailComponent, { className: "ProjectDetailComponent", filePath: "src/app/components/project-detail/project-detail.component.ts", lineNumber: 27 });
 })();
 
 // src/app/components/projects/projects.component.ts
 var _c08 = (a0) => ["/projetos", a0];
 function ProjectsComponent_div_8_mat_card_1_div_1_Template(rf, ctx) {
   if (rf & 1) {
-    \u0275\u0275elementStart(0, "div", 12);
-    \u0275\u0275element(1, "img", 13);
-    \u0275\u0275elementEnd();
+    const _r1 = \u0275\u0275getCurrentView();
+    \u0275\u0275elementStart(0, "div", 12)(1, "img", 13);
+    \u0275\u0275listener("error", function ProjectsComponent_div_8_mat_card_1_div_1_Template_img_error_1_listener() {
+      \u0275\u0275restoreView(_r1);
+      const repo_r2 = \u0275\u0275nextContext().$implicit;
+      return \u0275\u0275resetView(repo_r2.imagem = repo_r2.imagemFallback);
+    });
+    \u0275\u0275elementEnd()();
   }
   if (rf & 2) {
-    const repo_r1 = \u0275\u0275nextContext().$implicit;
+    const repo_r2 = \u0275\u0275nextContext().$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("src", repo_r1.imagem, \u0275\u0275sanitizeUrl)("alt", repo_r1.name);
+    \u0275\u0275property("src", repo_r2.imagem, \u0275\u0275sanitizeUrl)("alt", repo_r2.name);
   }
 }
 function ProjectsComponent_div_8_mat_card_1_Template(rf, ctx) {
@@ -81596,21 +81668,21 @@ function ProjectsComponent_div_8_mat_card_1_Template(rf, ctx) {
     \u0275\u0275elementEnd()()();
   }
   if (rf & 2) {
-    const repo_r1 = ctx.$implicit;
+    const repo_r2 = ctx.$implicit;
     \u0275\u0275advance();
-    \u0275\u0275property("ngIf", repo_r1.imagem);
+    \u0275\u0275property("ngIf", repo_r2.imagem);
     \u0275\u0275advance(4);
-    \u0275\u0275textInterpolate(repo_r1.linguagem);
+    \u0275\u0275textInterpolate(repo_r2.linguagem);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate1("", repo_r1.estrelas, " estrelas");
+    \u0275\u0275textInterpolate1("", repo_r2.estrelas, " estrelas");
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(repo_r1.name);
+    \u0275\u0275textInterpolate(repo_r2.name);
     \u0275\u0275advance(2);
-    \u0275\u0275textInterpolate(repo_r1.readmeDescricao);
+    \u0275\u0275textInterpolate(repo_r2.readmeDescricao);
     \u0275\u0275advance(2);
-    \u0275\u0275property("routerLink", \u0275\u0275pureFunction1(7, _c08, repo_r1.name));
+    \u0275\u0275property("routerLink", \u0275\u0275pureFunction1(7, _c08, repo_r2.name));
     \u0275\u0275advance(4);
-    \u0275\u0275property("href", repo_r1.html_url, \u0275\u0275sanitizeUrl);
+    \u0275\u0275property("href", repo_r2.html_url, \u0275\u0275sanitizeUrl);
   }
 }
 function ProjectsComponent_div_8_Template(rf, ctx) {
@@ -81620,9 +81692,9 @@ function ProjectsComponent_div_8_Template(rf, ctx) {
     \u0275\u0275elementEnd();
   }
   if (rf & 2) {
-    const ctx_r1 = \u0275\u0275nextContext();
+    const ctx_r2 = \u0275\u0275nextContext();
     \u0275\u0275advance();
-    \u0275\u0275property("ngForOf", ctx_r1.repos);
+    \u0275\u0275property("ngForOf", ctx_r2.repos);
   }
 }
 function ProjectsComponent_ng_template_9_Template(rf, ctx) {
@@ -81648,8 +81720,10 @@ var ProjectsComponent = class _ProjectsComponent {
       const repos = yield firstValueFrom(this.githubService.getProjetos());
       this.repos = yield Promise.all(repos.map((repo) => __async(this, null, function* () {
         const imagem = yield firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
+        const imagemFallback = this.githubService.getFallbackImagemProjeto(repo.name, repo.language);
         return __spreadProps(__spreadValues({}, repo), {
           imagem,
+          imagemFallback,
           readmeDescricao: repo.description?.trim() || "Sem descri\xE7\xE3o detalhada.",
           linguagem: repo.language || "C\xF3digo",
           estrelas: repo.stargazers_count
@@ -81660,7 +81734,7 @@ var ProjectsComponent = class _ProjectsComponent {
   static \u0275fac = function ProjectsComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ProjectsComponent)(\u0275\u0275directiveInject(GitHubServiceService), \u0275\u0275directiveInject(PLATFORM_ID));
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProjectsComponent, selectors: [["app-projects"]], decls: 11, vars: 2, consts: [["loading", ""], [1, "projects-page"], [1, "page-heading"], [1, "eyebrow"], ["class", "projects-grid", 4, "ngIf", "ngIfElse"], [1, "projects-grid"], ["class", "repo-card", 4, "ngFor", "ngForOf"], [1, "repo-card"], ["class", "repo-image-wrap", 4, "ngIf"], [1, "repo-meta"], ["mat-stroked-button", "", "color", "primary", 3, "routerLink"], ["mat-raised-button", "", "color", "accent", "target", "_blank", "rel", "noreferrer", 3, "href"], [1, "repo-image-wrap"], [3, "src", "alt"], [1, "loading-state"]], template: function ProjectsComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ProjectsComponent, selectors: [["app-projects"]], decls: 11, vars: 2, consts: [["loading", ""], [1, "projects-page"], [1, "page-heading"], [1, "eyebrow"], ["class", "projects-grid", 4, "ngIf", "ngIfElse"], [1, "projects-grid"], ["class", "repo-card", 4, "ngFor", "ngForOf"], [1, "repo-card"], ["class", "repo-image-wrap", 4, "ngIf"], [1, "repo-meta"], ["mat-stroked-button", "", "color", "primary", 3, "routerLink"], ["mat-raised-button", "", "color", "accent", "target", "_blank", "rel", "noreferrer", 3, "href"], [1, "repo-image-wrap"], [3, "error", "src", "alt"], [1, "loading-state"]], template: function ProjectsComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "section", 1)(1, "div", 2)(2, "p", 3);
       \u0275\u0275text(3, "Reposit\xF3rios");
@@ -81675,9 +81749,9 @@ var ProjectsComponent = class _ProjectsComponent {
       \u0275\u0275elementEnd();
     }
     if (rf & 2) {
-      const loading_r3 = \u0275\u0275reference(10);
+      const loading_r4 = \u0275\u0275reference(10);
       \u0275\u0275advance(8);
-      \u0275\u0275property("ngIf", ctx.repos.length > 0)("ngIfElse", loading_r3);
+      \u0275\u0275property("ngIf", ctx.repos.length > 0)("ngIfElse", loading_r4);
     }
   }, dependencies: [CommonModule, NgForOf, NgIf, MatCardModule, MatCard, MatCardActions, MatCardContent, MatCardTitle, MatButtonModule, MatAnchor, MatIconModule, MatIcon, RouterLink], styles: ['\n\n.projects-page[_ngcontent-%COMP%] {\n  display: grid;\n  gap: 1.25rem;\n}\n.page-heading[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n  margin: 0.4rem 0 0;\n  font-size: clamp(1.8rem, 3vw, 2.5rem);\n  font-family: "Space Grotesk", sans-serif;\n}\n.page-heading[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  margin: 0.8rem 0 0;\n  max-width: 65ch;\n  line-height: 1.7;\n  color: #cbd5e1;\n}\n.eyebrow[_ngcontent-%COMP%] {\n  margin: 0;\n  text-transform: uppercase;\n  letter-spacing: 0.18em;\n  font-size: 0.72rem;\n  color: #7dd3fc;\n}\n.projects-grid[_ngcontent-%COMP%] {\n  display: grid;\n  grid-template-columns: repeat(2, minmax(0, 1fr));\n  gap: 1rem;\n}\n.repo-card[_ngcontent-%COMP%] {\n  overflow: hidden;\n  border: 1px solid rgba(148, 163, 184, 0.16);\n  background: rgba(8, 15, 28, 0.86);\n}\n.repo-image-wrap[_ngcontent-%COMP%] {\n  padding: 0.8rem 0.8rem 0;\n}\n.repo-image-wrap[_ngcontent-%COMP%]   img[_ngcontent-%COMP%] {\n  width: 100%;\n  height: 180px;\n  object-fit: cover;\n  border-radius: 18px;\n}\n.repo-meta[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: space-between;\n  gap: 0.75rem;\n  margin-bottom: 0.75rem;\n  font-size: 0.82rem;\n  color: #94a3b8;\n}\n.repo-card[_ngcontent-%COMP%]   mat-card-content[_ngcontent-%COMP%] {\n  padding-top: 1rem;\n}\n.repo-card[_ngcontent-%COMP%]   mat-card-title[_ngcontent-%COMP%] {\n  margin-bottom: 0.6rem;\n  color: #f8fafc;\n  font-size: 1.1rem;\n}\n.repo-card[_ngcontent-%COMP%]   p[_ngcontent-%COMP%] {\n  margin: 0;\n  color: #cbd5e1;\n  line-height: 1.7;\n}\n.repo-card[_ngcontent-%COMP%]   mat-card-actions[_ngcontent-%COMP%] {\n  padding: 0 1rem 1rem;\n}\n.loading-state[_ngcontent-%COMP%] {\n  padding: 1.5rem;\n  border-radius: 20px;\n  border: 1px dashed rgba(148, 163, 184, 0.26);\n  color: #cbd5e1;\n  background: rgba(15, 23, 42, 0.35);\n}\n@media (max-width: 820px) {\n  .projects-grid[_ngcontent-%COMP%] {\n    grid-template-columns: 1fr;\n  }\n}'] });
 };
@@ -81690,7 +81764,7 @@ var ContactComponent = class _ContactComponent {
   static \u0275fac = function ContactComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _ContactComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ContactComponent, selectors: [["app-contact"]], decls: 33, vars: 0, consts: [[1, "contact-page"], [1, "contact-card"], [1, "contact-header"], [1, "eyebrow"], [1, "contact-item"], ["href", "mailto:daniloer.costa@gmail.com"], ["href", "https://www.linkedin.com/in/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["href", "https://wa.me/5519981176992", "target", "_blank", "rel", "noreferrer"]], template: function ContactComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _ContactComponent, selectors: [["app-contact"]], decls: 33, vars: 0, consts: [[1, "contact-page"], [1, "contact-card"], [1, "contact-header"], [1, "eyebrow"], [1, "contact-item"], ["href", "mailto:danilocostaa50@gmail.com"], ["href", "https://www.linkedin.com/in/daniloercosta", "target", "_blank", "rel", "noreferrer"], ["href", "https://wa.me/5519981176992", "target", "_blank", "rel", "noreferrer"]], template: function ContactComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275elementStart(0, "section", 0)(1, "mat-card", 1)(2, "div", 2)(3, "p", 3);
       \u0275\u0275text(4, "Contato");
@@ -81706,7 +81780,7 @@ var ContactComponent = class _ContactComponent {
       \u0275\u0275text(14, "Email");
       \u0275\u0275elementEnd();
       \u0275\u0275elementStart(15, "a", 5);
-      \u0275\u0275text(16, "daniloer.costa@gmail.com");
+      \u0275\u0275text(16, "danilocostaa50@gmail.com");
       \u0275\u0275elementEnd()()();
       \u0275\u0275elementStart(17, "div", 4)(18, "mat-icon");
       \u0275\u0275text(19, "business_center");

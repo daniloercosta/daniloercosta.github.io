@@ -36,10 +36,12 @@ export class ProjectsComponent implements OnInit {
     this.repos = await Promise.all(
       repos.map(async repo => {
         const imagem = await firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
+        const imagemFallback = this.githubService.getFallbackImagemProjeto(repo.name, repo.language);
 
         return {
           ...repo,
           imagem,
+          imagemFallback,
           readmeDescricao: repo.description?.trim() || 'Sem descrição detalhada.',
           linguagem: repo.language || 'Código',
           estrelas: repo.stargazers_count

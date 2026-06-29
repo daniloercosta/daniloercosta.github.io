@@ -29,7 +29,11 @@
         </div>
 
         <mat-card class="hero-card">
-          <img [src]="projeto.imagem" [alt]="projeto.name" class="hero-image">
+          <img
+            [src]="projeto.imagem"
+            [alt]="projeto.name"
+            class="hero-image"
+            (error)="projeto.imagem = projeto.imagemFallback">
           <div class="hero-stats">
             <article>
               <strong>{{ projeto.language || 'Código' }}</strong>

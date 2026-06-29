@@ -48,7 +48,7 @@
         <mat-icon>open_in_new</mat-icon>
         GitHub
       </a>
-      <a mat-button color="accent" href="mailto:daniloer.costa@gmail.com">
+      <a mat-button color="accent" href="mailto:danilocostaa50@gmail.com">
         <mat-icon>mail</mat-icon>
         Email
       </a>
@@ -66,7 +66,10 @@
     <div ngxSlickItem *ngFor="let projeto of projetos" class="carousel-item">
       <mat-card class="project-card">
         <div class="project-image-wrap">
-          <img [src]="projeto.imagem" [alt]="projeto.nome">
+          <img
+            [src]="projeto.imagem"
+            [alt]="projeto.nome"
+            (error)="projeto.imagem = projeto.imagemFallback">
         </div>
         <mat-card-content>
           <div class="project-meta">
@@ -106,7 +109,7 @@
     <p>
       Entre em contato por e-mail e eu te respondo com a mesma clareza que busco no código.
     </p>
-    <a mat-raised-button color="accent" href="mailto:daniloer.costa@gmail.com">
+    <a mat-raised-button color="accent" href="mailto:danilocostaa50@gmail.com">
       <mat-icon>send</mat-icon>
       Falar comigo
     </a>

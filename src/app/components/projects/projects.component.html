@@ -8,7 +8,10 @@
   <div class="projects-grid" *ngIf="repos.length > 0; else loading">
     <mat-card *ngFor="let repo of repos" class="repo-card">
       <div class="repo-image-wrap" *ngIf="repo.imagem">
-        <img [src]="repo.imagem" [alt]="repo.name">
+        <img
+          [src]="repo.imagem"
+          [alt]="repo.name"
+          (error)="repo.imagem = repo.imagemFallback">
       </div>
 
       <mat-card-content>
