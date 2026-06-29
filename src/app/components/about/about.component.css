@@ -1,25 +1,62 @@
-.sobre-mim-card {
-  margin: 20px;
-  padding: 16px;
+.about-card {
+  padding: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(8, 15, 28, 0.86);
 }
 
-.title {
-  margin-left: 8px;
-  font-size: 1.4rem;
-  font-weight: 500;
+.about-header h2 {
+  margin: 0.4rem 0 0;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-family: 'Space Grotesk', sans-serif;
 }
 
-mat-card-content ul {
-  list-style: none;
-  padding-left: 0;
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: #7dd3fc;
 }
 
-mat-card-content li {
-  display: flex;
-  align-items: center;
-  margin-bottom: 6px;
+.about-card mat-card-content {
+  padding-top: 1rem;
 }
 
-mat-card-content mat-icon {
-  margin-right: 8px;
+.about-card p {
+  margin: 0 0 1rem;
+  line-height: 1.8;
+  color: #cbd5e1;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.skills-grid article {
+  padding: 1rem;
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.skills-grid mat-icon {
+  color: #7dd3fc;
+}
+
+.skills-grid h3 {
+  margin: 0.7rem 0 0.35rem;
+  font-size: 1rem;
+}
+
+.skills-grid p {
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
 }

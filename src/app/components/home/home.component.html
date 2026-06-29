@@ -1,57 +1,114 @@
-<!-- Perfil do GitHub -->
-<mat-card class="perfil-card">
-  <img [src]="perfil?.avatar_url" alt="Minha Foto" class="avatar" />
-  <h2>{{ perfil?.name || perfil?.login }}</h2>
-  <p class="bio">{{ perfil?.bio }}</p>
+<section class="home-hero">
+  <div class="hero-copy">
+    <p class="eyebrow">Desenvolvimento • Dados • Produto</p>
+    <h2>Interfaces mais claras, código mais confiável e projetos com presença real.</h2>
+    <p class="lead">
+      Trabalho com C#, Angular e SQL para criar experiências que parecem mais cuidadas, rápidas e fáceis de usar.
+    </p>
 
-  <!-- Botões com cor e ícone -->
-<div class="botoes-redes">
-  <a mat-raised-button color="primary" [href]="perfil?.html_url" target="_blank">
-    <mat-icon>code</mat-icon> GitHub
-  </a>
-  
-  <a mat-raised-button color="accent" href="https://www.linkedin.com/in/seuusuario" target="_blank">
-    <mat-icon>work</mat-icon> LinkedIn
-  </a>
-</div>
+    <div class="hero-actions">
+      <a mat-raised-button color="primary" href="https://github.com/daniloercosta" target="_blank" rel="noreferrer">
+        <mat-icon>code</mat-icon>
+        Ver GitHub
+      </a>
+      <a mat-stroked-button color="accent" routerLink="/projetos">
+        <mat-icon>rocket_launch</mat-icon>
+        Explorar projetos
+      </a>
+    </div>
 
-</mat-card>
+    <div class="hero-metrics">
+      <article>
+        <strong>{{ projetos.length || 6 }}</strong>
+        <span>Projetos em destaque</span>
+      </article>
+      <article>
+        <strong>3</strong>
+        <span>Frentes principais</span>
+      </article>
+      <article>
+        <strong>100%</strong>
+        <span>Foco em clareza visual</span>
+      </article>
+    </div>
+  </div>
 
-<div class="home-container">
-  <h1>Bem-vindo ao meu portfólio!</h1>
-  <p>Sou um desenvolvedor especializado em C#, Angular, SQL e muito mais. Aqui você encontrará alguns dos meus projetos e experiências.</p>
-
-  <!-- Carrossel de Projetos -->
-  <h2>🚀 Projetos em Destaque</h2>
-<ngx-slick-carousel class="carousel" [config]="slideConfig">
-  <div ngxSlickItem *ngFor="let projeto of projetos" class="carousel-item">
-    <mat-card class="projeto-card">
-      <img mat-card-image [src]="projeto.imagem" alt="{{ projeto.nome }}">
-      <mat-card-title>{{ projeto.nome }}</mat-card-title>
-      <mat-card-content>{{ projeto.descricao }}</mat-card-content>
-
-      <div class="card-footer">
-        <a mat-raised-button color="accent" class="botao-vermais" [routerLink]="'/projetos/' + projeto.id">
-          <mat-icon>visibility</mat-icon> Ver mais
-        </a>
+  <mat-card class="profile-card">
+    <div class="profile-top">
+      <img [src]="perfil?.avatar_url" alt="Foto de Danilo Costa" class="avatar" />
+      <div>
+        <p class="eyebrow">Perfil GitHub</p>
+        <h3>{{ perfil?.name || perfil?.login || 'Danilo Costa' }}</h3>
+        <p>{{ perfil?.bio || 'Desenvolvedor e analista de dados com foco em software bem construído.' }}</p>
       </div>
-    </mat-card>
-  </div>
-</ngx-slick-carousel>
+    </div>
 
+    <div class="profile-links">
+      <a mat-button color="primary" [href]="perfil?.html_url || 'https://github.com/daniloercosta'" target="_blank" rel="noreferrer">
+        <mat-icon>open_in_new</mat-icon>
+        GitHub
+      </a>
+      <a mat-button color="accent" href="mailto:daniloer.costa@gmail.com">
+        <mat-icon>mail</mat-icon>
+        Email
+      </a>
+    </div>
+  </mat-card>
+</section>
 
-  <!-- Tecnologias -->
-  <h2>🛠️ Tecnologias que uso</h2>
-  <div class="tecnologias">
-    <span class="tag">C#</span>
-    <span class="tag">Angular</span>
-    <span class="tag">SQL Server</span>
-    <span class="tag">Node.js</span>
-    <span class="tag">TypeScript</span>
+<section class="section-block">
+  <div class="section-heading">
+    <p class="eyebrow">Projetos em destaque</p>
+    <h3>Uma amostra do que saiu do GitHub recentemente.</h3>
   </div>
 
-  <!-- Botão de contato -->
-  <div class="contato">
-    <a mat-raised-button color="warn" href="mailto:seuemail@gmail.com">📩 Entre em contato</a>
-  </div>
-</div>
+  <ngx-slick-carousel class="carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let projeto of projetos" class="carousel-item">
+      <mat-card class="project-card">
+        <div class="project-image-wrap">
+          <img [src]="projeto.imagem" [alt]="projeto.nome">
+        </div>
+        <mat-card-content>
+          <div class="project-meta">
+            <span>{{ projeto.linguagem }}</span>
+            <span>{{ projeto.estrelas }} estrelas</span>
+          </div>
+          <mat-card-title>{{ projeto.nome }}</mat-card-title>
+          <p>{{ projeto.descricao }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <a mat-raised-button color="primary" [href]="projeto.url" target="_blank" rel="noreferrer">
+            <mat-icon>open_in_new</mat-icon>
+            Abrir projeto
+          </a>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </ngx-slick-carousel>
+</section>
+
+<section class="section-block grid-two">
+  <mat-card class="info-card">
+    <p class="eyebrow">Tecnologias</p>
+    <h3>Stack que sustenta o meu trabalho.</h3>
+    <div class="tags">
+      <span>C#</span>
+      <span>Angular</span>
+      <span>SQL Server</span>
+      <span>Node.js</span>
+      <span>TypeScript</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="info-card">
+    <p class="eyebrow">Contato rápido</p>
+    <h3>Quer conversar sobre projeto ou oportunidade?</h3>
+    <p>
+      Entre em contato por e-mail e eu te respondo com a mesma clareza que busco no código.
+    </p>
+    <a mat-raised-button color="accent" href="mailto:daniloer.costa@gmail.com">
+      <mat-icon>send</mat-icon>
+      Falar comigo
+    </a>
+  </mat-card>
+</section>

@@ -1,23 +1,37 @@
-<h2>Meus Projetos no GitHub</h2>
+<section class="projects-page">
+  <div class="page-heading">
+    <p class="eyebrow">Repositórios</p>
+    <h2>Projetos no GitHub</h2>
+    <p>Uma vitrine mais limpa dos repositórios recentes, com leitura rápida e foco no que realmente importa.</p>
+  </div>
 
-<div *ngIf="repos.length > 0; else loading">
-  <mat-card *ngFor="let repo of repos" class="repo-card">
-    <img *ngIf="repo.imagem" mat-card-image [src]="repo.imagem" alt="{{ repo.name }}" style="object-fit: contain; max-height: 200px;" />
-    
-    <mat-card-title>{{ repo.name }}</mat-card-title>
-    
-    <mat-card-content>
-      <p>{{ repo.readmeDescricao }}</p>
-    </mat-card-content>
+  <div class="projects-grid" *ngIf="repos.length > 0; else loading">
+    <mat-card *ngFor="let repo of repos" class="repo-card">
+      <div class="repo-image-wrap" *ngIf="repo.imagem">
+        <img [src]="repo.imagem" [alt]="repo.name">
+      </div>
 
-    <mat-card-actions>
-      <a mat-button color="accent" [href]="repo.html_url" target="_blank">
-        <mat-icon>code</mat-icon> Ver no GitHub
-      </a>
-    </mat-card-actions>
-  </mat-card>
-</div>
+      <mat-card-content>
+        <div class="repo-meta">
+          <span>{{ repo.linguagem }}</span>
+          <span>{{ repo.estrelas }} estrelas</span>
+        </div>
+        <mat-card-title>{{ repo.name }}</mat-card-title>
+        <p>{{ repo.readmeDescricao }}</p>
+      </mat-card-content>
 
-<ng-template #loading>
-  <p>Carregando repositórios...</p>
-</ng-template>
+      <mat-card-actions>
+        <a mat-raised-button color="accent" [href]="repo.html_url" target="_blank" rel="noreferrer">
+          <mat-icon>open_in_new</mat-icon>
+          Ver no GitHub
+        </a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #loading>
+    <div class="loading-state">
+      <p>Carregando repositórios...</p>
+    </div>
+  </ng-template>
+</section>

@@ -1,18 +1,26 @@
-<mat-sidenav mode="side" opened>
-  <h3 class="titulo">Meu Portfólio</h3>
+<nav class="nav-card">
+  <div class="nav-header">
+    <p class="eyebrow">Navegação</p>
+    <h2>Seções</h2>
+    <p>Um resumo rápido do que você pode explorar no site.</p>
+  </div>
 
-  <mat-nav-list>
-    <a mat-list-item routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
-      🏠 Início
+  <div class="nav-links">
+    <a routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+      <span>Início</span>
+      <small>Resumo, destaque e atalho rápido.</small>
     </a>
-    <a mat-list-item routerLink="/sobre" routerLinkActive="active-link">
-      👤 Sobre
+    <a routerLink="/sobre" routerLinkActive="active-link">
+      <span>Sobre</span>
+      <small>Experiência, foco técnico e perfil.</small>
     </a>
-    <a mat-list-item routerLink="/projetos" routerLinkActive="active-link">
-      💻 Projetos
+    <a routerLink="/projetos" routerLinkActive="active-link">
+      <span>Projetos</span>
+      <small>Repositórios e entregas recentes.</small>
     </a>
-    <a mat-list-item routerLink="/contato" routerLinkActive="active-link">
-      📩 Contato
+    <a routerLink="/contato" routerLinkActive="active-link">
+      <span>Contato</span>
+      <small>Fale direto por e-mail ou WhatsApp.</small>
     </a>
-  </mat-nav-list>
-</mat-sidenav>
+  </div>
+</nav>

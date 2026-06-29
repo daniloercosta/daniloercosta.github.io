@@ -1,38 +1,51 @@
-.contato-card {
-  max-width: 500px;
-  margin: 2rem auto;
-  padding: 1rem;
-  text-align: left;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+.contact-card {
+  padding: 1.25rem;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  background: rgba(8, 15, 28, 0.86);
 }
 
-.title {
-  font-size: 1.5rem;
-  margin-left: 8px;
+.contact-header h2 {
+  margin: 0.4rem 0 0;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-family: 'Space Grotesk', sans-serif;
 }
 
-mat-card-content p {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 1rem 0;
+.eyebrow {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: #7dd3fc;
 }
 
-a {
-  text-decoration: none;
-  color: #8e24aa;
-  font-weight: 500;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: #ba68c8;
-}
-
-mat-card-actions {
-  display: flex;
-  justify-content: flex-end;
+.contact-card mat-card-content {
+  display: grid;
   gap: 1rem;
-  margin-top: 1rem;
+  padding-top: 1rem;
+}
+
+.contact-item {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+  padding: 1rem;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.14);
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.contact-item strong {
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.contact-item a {
+  color: #7dd3fc;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.contact-item a:hover {
+  color: #5eead4;
 }

@@ -1,36 +1,45 @@
-import { GitHubServiceService } from './../../services/git-hub-service.service';
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import { Component, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { firstValueFrom } from 'rxjs';
+import { GitHubServiceService } from '../../services/git-hub-service.service';
 
 @Component({
   selector: 'app-projects',
-  imports: [MatCardModule, MatButtonModule,CommonModule,MatIcon],
+  standalone: true,
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent implements OnInit {
   repos: any[] = [];
 
-  constructor(private http: HttpClient, private githubService: GitHubServiceService) {}
+  constructor(private githubService: GitHubServiceService) {}
 
   ngOnInit(): void {
-    this.githubService.getProjetos().subscribe(repos => {
-      this.repos = repos;
+    void this.carregarProjetos();
+  }
 
-      this.repos.forEach(repo => {
-        this.githubService.adicionarImagemAoProjeto(repo.name).subscribe(imagem => {
-          repo.imagem = imagem;
-        });
+  async carregarProjetos(): Promise<void> {
+    const repos = await firstValueFrom(this.githubService.getProjetos());
 
-        this.githubService.getReadme(repo.name).subscribe(readme => {
-          const descricao = this.githubService.extrairDescricao(readme);
-          repo.readmeDescricao = descricao || 'Sem descrição detalhada.';
-        });
-      });
-    });
+    this.repos = await Promise.all(
+      repos.map(async repo => {
+        const [imagem, readme] = await Promise.all([
+          firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name)),
+          firstValueFrom(this.githubService.getReadme(repo.name))
+        ]);
+
+        return {
+          ...repo,
+          imagem,
+          readmeDescricao: repo.description?.trim() || this.githubService.extrairDescricao(readme) || 'Sem descrição detalhada.',
+          linguagem: repo.language || 'Código',
+          estrelas: repo.stargazers_count
+        };
+      })
+    );
   }
 }

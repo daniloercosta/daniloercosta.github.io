@@ -5,10 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-about',
-  imports: [MatCardModule,MatDividerModule,MatIconModule],
+  standalone: true,
+  imports: [MatCardModule, MatDividerModule, MatIconModule],
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
-export class AboutComponent {
-
-}
+export class AboutComponent {}

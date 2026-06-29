@@ -1,21 +1,13 @@
 <app-header></app-header>
 
-<div class="layout-wrapper">
-  <mat-sidenav-container class="layout-container">
+<div class="app-shell">
+  <aside class="sidebar">
+    <app-nav></app-nav>
+  </aside>
 
-    <!-- Único sidenav -->
-    <mat-sidenav mode="side" opened>
-      <!-- app-nav NÃO deve conter outro <mat-sidenav> dentro -->
-      <app-nav></app-nav>
-    </mat-sidenav>
-
-    <mat-sidenav-content>
-      <div class="main-content">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-
-  </mat-sidenav-container>
+  <main class="content-surface">
+    <router-outlet></router-outlet>
+  </main>
 </div>
 
-<app-footer class="fixed-footer"></app-footer>
+<app-footer></app-footer>
