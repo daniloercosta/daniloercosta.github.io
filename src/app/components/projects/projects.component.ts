@@ -35,15 +35,12 @@ export class ProjectsComponent implements OnInit {
 
     this.repos = await Promise.all(
       repos.map(async repo => {
-        const [imagem, readme] = await Promise.all([
-          firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name)),
-          firstValueFrom(this.githubService.getReadme(repo.name))
-        ]);
+        const imagem = await firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
 
         return {
           ...repo,
           imagem,
-          readmeDescricao: repo.description?.trim() || this.githubService.extrairDescricao(readme) || 'Sem descrição detalhada.',
+          readmeDescricao: repo.description?.trim() || 'Sem descrição detalhada.',
           linguagem: repo.language || 'Código',
           estrelas: repo.stargazers_count
         };

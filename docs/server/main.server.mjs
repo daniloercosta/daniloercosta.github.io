@@ -80868,6 +80868,7 @@ var GitHubServiceService = class _GitHubServiceService {
   }
   username = "daniloercosta";
   reposUrl = `https://api.github.com/users/${this.username}/repos`;
+  defaultProjectImage = "/img/default-project.png";
   getProjetos() {
     return this.http.get(this.reposUrl).pipe(map((repos) => repos.slice().sort((a, b) => new Date(b.pushed_at).getTime() - new Date(a.pushed_at).getTime()).slice(0, 9)));
   }
@@ -80881,7 +80882,7 @@ var GitHubServiceService = class _GitHubServiceService {
     return this.buscarReadme(repoName, "main").pipe(catchError(() => this.buscarReadme(repoName, "master")), catchError(() => of("")));
   }
   adicionarImagemAoProjeto(repoName) {
-    return this.getReadme(repoName).pipe(map((readme) => this.extrairPrimeiraImagem(readme)), map((imageUrl) => imageUrl || `https://raw.githubusercontent.com/${this.username}/${repoName}/main/projeto.png`), catchError(() => of(`https://raw.githubusercontent.com/${this.username}/${repoName}/main/projeto.png`)));
+    return of(`https://opengraph.githubassets.com/1/${this.username}/${repoName}`).pipe(catchError(() => of(this.defaultProjectImage)));
   }
   extrairPrimeiraImagem(readme) {
     const regex = /!\[.*?\]\((https?:\/\/.*?\.(?:png|jpg|jpeg|gif|svg))\)/i;
@@ -80985,14 +80986,11 @@ var HomeComponent = class _HomeComponent {
       const projetos = yield firstValueFrom(this.githubService.getProjetos());
       const selecionados = projetos.slice().sort(() => Math.random() - 0.5).slice(0, 6);
       this.projetos = yield Promise.all(selecionados.map((repo) => __async(this, null, function* () {
-        const [imagem, readme] = yield Promise.all([
-          firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name)),
-          firstValueFrom(this.githubService.getReadme(repo.name))
-        ]);
+        const imagem = yield firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
         return {
           id: repo.name,
           nome: repo.name,
-          descricao: repo.description?.trim() || this.githubService.extrairDescricao(readme) || "Projeto dispon\xEDvel no GitHub.",
+          descricao: repo.description?.trim() || "Projeto dispon\xEDvel no GitHub.",
           imagem,
           url: repo.html_url,
           linguagem: repo.language || "C\xF3digo",
@@ -81649,13 +81647,10 @@ var ProjectsComponent = class _ProjectsComponent {
     return __async(this, null, function* () {
       const repos = yield firstValueFrom(this.githubService.getProjetos());
       this.repos = yield Promise.all(repos.map((repo) => __async(this, null, function* () {
-        const [imagem, readme] = yield Promise.all([
-          firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name)),
-          firstValueFrom(this.githubService.getReadme(repo.name))
-        ]);
+        const imagem = yield firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
         return __spreadProps(__spreadValues({}, repo), {
           imagem,
-          readmeDescricao: repo.description?.trim() || this.githubService.extrairDescricao(readme) || "Sem descri\xE7\xE3o detalhada.",
+          readmeDescricao: repo.description?.trim() || "Sem descri\xE7\xE3o detalhada.",
           linguagem: repo.language || "C\xF3digo",
           estrelas: repo.stargazers_count
         });

@@ -23,6 +23,7 @@ export interface GitHubRepo {
 export class GitHubServiceService {
   private readonly username = 'daniloercosta';
   private readonly reposUrl = `https://api.github.com/users/${this.username}/repos`;
+  private readonly defaultProjectImage = '/img/default-project.png';
 
   constructor(private http: HttpClient) {}
 
@@ -53,14 +54,8 @@ export class GitHubServiceService {
   }
 
   adicionarImagemAoProjeto(repoName: string): Observable<string> {
-    return this.getReadme(repoName).pipe(
-      map(readme => this.extrairPrimeiraImagem(readme)),
-      map(imageUrl =>
-        imageUrl || `https://raw.githubusercontent.com/${this.username}/${repoName}/main/projeto.png`
-      ),
-      catchError(() =>
-        of(`https://raw.githubusercontent.com/${this.username}/${repoName}/main/projeto.png`)
-      )
+    return of(`https://opengraph.githubassets.com/1/${this.username}/${repoName}`).pipe(
+      catchError(() => of(this.defaultProjectImage))
     );
   }
 

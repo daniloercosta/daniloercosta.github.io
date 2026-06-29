@@ -72,15 +72,12 @@ export class HomeComponent implements OnInit {
 
     this.projetos = await Promise.all(
       selecionados.map(async repo => {
-        const [imagem, readme] = await Promise.all([
-          firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name)),
-          firstValueFrom(this.githubService.getReadme(repo.name))
-        ]);
+        const imagem = await firstValueFrom(this.githubService.adicionarImagemAoProjeto(repo.name));
 
         return {
           id: repo.name,
           nome: repo.name,
-          descricao: repo.description?.trim() || this.githubService.extrairDescricao(readme) || 'Projeto disponível no GitHub.',
+          descricao: repo.description?.trim() || 'Projeto disponível no GitHub.',
           imagem,
           url: repo.html_url,
           linguagem: repo.language || 'Código',
