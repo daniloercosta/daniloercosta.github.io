@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "postbuild": "node scripts/sync-gh-pages.mjs",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:daniloercosta.github.io": "node dist/daniloercosta.github.io/server/server.mjs"
