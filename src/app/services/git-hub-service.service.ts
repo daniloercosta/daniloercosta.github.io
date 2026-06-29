@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of, switchMap } from 'rxjs';
 
 export interface GitHubRepo {
   name: string;
@@ -10,6 +10,7 @@ export interface GitHubRepo {
   pushed_at: string;
   updated_at?: string;
   created_at?: string;
+  default_branch?: string;
   language: string | null;
   stargazers_count: number;
   forks_count?: number;
@@ -47,14 +48,26 @@ export class GitHubServiceService {
   }
 
   getReadme(repoName: string): Observable<string> {
-    return this.buscarReadme(repoName, 'main').pipe(
+    return this.getProjeto(repoName).pipe(
+      switchMap(repo => this.buscarReadme(repoName, repo.default_branch || 'main')),
+      catchError(() => this.buscarReadme(repoName, 'main')),
       catchError(() => this.buscarReadme(repoName, 'master')),
       catchError(() => of(''))
     );
   }
 
   adicionarImagemAoProjeto(repoName: string): Observable<string> {
-    return of(`https://opengraph.githubassets.com/1/${this.username}/${repoName}`);
+    return this.getProjeto(repoName).pipe(
+      switchMap(repo =>
+        this.buscarReadme(repoName, repo.default_branch || 'main').pipe(
+          map(readme => this.extrairPrimeiraImagem(readme, repoName, repo.default_branch || 'main')),
+          catchError(() => this.buscarReadme(repoName, 'main').pipe(map(readme => this.extrairPrimeiraImagem(readme, repoName, 'main')))),
+          catchError(() => this.buscarReadme(repoName, 'master').pipe(map(readme => this.extrairPrimeiraImagem(readme, repoName, 'master'))))
+        )
+      ),
+      map(imageUrl => imageUrl || this.defaultProjectImage),
+      catchError(() => of(this.defaultProjectImage))
+    );
   }
 
   getFallbackImagemProjeto(repoName: string, language?: string | null): string {
@@ -62,10 +75,16 @@ export class GitHubServiceService {
     return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(label)}`;
   }
 
-  extrairPrimeiraImagem(readme: string): string | null {
-    const regex = /!\[.*?\]\((https?:\/\/.*?\.(?:png|jpg|jpeg|gif|svg))\)/i;
-    const match = readme.match(regex);
-    return match ? match[1] : null;
+  extrairPrimeiraImagem(readme: string, repoName?: string, branch = 'main'): string | null {
+    const markdownRegex = /!\[[^\]]*?\]\(([^)]+)\)/i;
+    const htmlRegex = /<img[^>]*src=["']([^"']+)["']/i;
+    const match = readme.match(markdownRegex) || readme.match(htmlRegex);
+    if (!match) {
+      return null;
+    }
+
+    const rawUrl = match[1].trim();
+    return this.resolverUrlImagem(rawUrl, repoName, branch);
   }
 
   extrairDescricao(readme: string): string {
@@ -81,8 +100,27 @@ export class GitHubServiceService {
   }
 
   private buscarReadme(repoName: string, branch: string): Observable<string> {
-    const url = `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/README.md`;
-    return this.http.get(url, { responseType: 'text' });
+    const url = `https://api.github.com/repos/${this.username}/${repoName}/readme`;
+    return this.http.get(url, {
+      responseType: 'text',
+      headers: {
+        Accept: 'application/vnd.github.raw'
+      }
+    });
+  }
+
+  private resolverUrlImagem(url: string, repoName?: string, branch = 'main'): string {
+    if (/^(https?:|data:|blob:|\/)/i.test(url)) {
+      if (url.startsWith('/')) {
+        const normalizedPath = url.replace(/^\/+/, '');
+        return `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/${normalizedPath}`;
+      }
+
+      return url;
+    }
+
+    const normalized = url.replace(/^\.\/+/, '').replace(/^\/+/, '');
+    return `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/${normalized}`;
   }
 
   private criarImagemProjetoSvg(repoName: string, language?: string | null): string {

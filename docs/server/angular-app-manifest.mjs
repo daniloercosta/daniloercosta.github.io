@@ -28,11 +28,11 @@ export default {
 ],
   entryPointToBrowserMapping: undefined,
   assets: {
-    'index.csr.html': {size: 695, hash: 'a9ae50c01f31eeb32fbd08f88f79cb67ad0d49077a2e4e5e70857874a8a1bcfa', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 1235, hash: 'b92bd13383099528aaa17c5a93c040940eda2cc837127c962845e0a73896a854', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'sobre/index.html': {size: 21875, hash: '3d20f145b8c9518ce918316a2bd8733526f5065978b2d8a06c1bb4519d96dce6', text: () => import('./assets-chunks/sobre_index_html.mjs').then(m => m.default)},
-    'projetos/index.html': {size: 14768, hash: '51669d81ad0dfe03d8d3b3cd4819df57e495be763f5c147ed3138d2979dc42c3', text: () => import('./assets-chunks/projetos_index_html.mjs').then(m => m.default)},
-    'index.html': {size: 49326, hash: '33e1c28ee2f00dc3af94562c28bb47b818f26feddef430a5279eedf458505fe0', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
-    'contato/index.html': {size: 20999, hash: '013623af80cccfd9397d4cf2a7658cbdd3a635ba5a512ba0796d24352b3c59c4', text: () => import('./assets-chunks/contato_index_html.mjs').then(m => m.default)}
+    'index.csr.html': {size: 695, hash: '3e4f74c128929ec5a12f2b51fbe44d680c3a1b8500e1483d618bbdfb1f32121a', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 1235, hash: '9fb0b4068739bd5d31f983aa25e9161e8bd07143e2711ef1baddb92eb0dc7e60', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'projetos/index.html': {size: 14768, hash: '3207fddd86a9d35cdfc96b595a4d64bdfe518ed0a8582ec8afac8f01584c001a', text: () => import('./assets-chunks/projetos_index_html.mjs').then(m => m.default)},
+    'index.html': {size: 49326, hash: 'e010474f3f11b405f6eb3e27f03cafb31cf9f3f5c8e5cef0968f9b7de338005d', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
+    'sobre/index.html': {size: 21875, hash: 'e89704a884ed7f0f13bb2210a71a77a9d7f20c5a206504df9c6bde261bad8f71', text: () => import('./assets-chunks/sobre_index_html.mjs').then(m => m.default)},
+    'contato/index.html': {size: 20999, hash: '9ad714b6ce191098d20ef2e1e4c86ae0788f80764404f6e603672dffcbf71a84', text: () => import('./assets-chunks/contato_index_html.mjs').then(m => m.default)}
   },
 };

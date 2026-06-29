@@ -53213,26 +53213,47 @@ var GitHubServiceService = class _GitHubServiceService {
     return this.http.get(`https://api.github.com/repos/${this.username}/${repoName}`);
   }
   getReadme(repoName) {
-    return this.buscarReadme(repoName, "main").pipe(catchError(() => this.buscarReadme(repoName, "master")), catchError(() => of("")));
+    return this.getProjeto(repoName).pipe(switchMap((repo) => this.buscarReadme(repoName, repo.default_branch || "main")), catchError(() => this.buscarReadme(repoName, "main")), catchError(() => this.buscarReadme(repoName, "master")), catchError(() => of("")));
   }
   adicionarImagemAoProjeto(repoName) {
-    return of(`https://opengraph.githubassets.com/1/${this.username}/${repoName}`);
+    return this.getProjeto(repoName).pipe(switchMap((repo) => this.buscarReadme(repoName, repo.default_branch || "main").pipe(map((readme) => this.extrairPrimeiraImagem(readme, repoName, repo.default_branch || "main")), catchError(() => this.buscarReadme(repoName, "main").pipe(map((readme) => this.extrairPrimeiraImagem(readme, repoName, "main")))), catchError(() => this.buscarReadme(repoName, "master").pipe(map((readme) => this.extrairPrimeiraImagem(readme, repoName, "master")))))), map((imageUrl) => imageUrl || this.defaultProjectImage), catchError(() => of(this.defaultProjectImage)));
   }
   getFallbackImagemProjeto(repoName, language) {
     const label = this.criarImagemProjetoSvg(repoName, language);
     return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(label)}`;
   }
-  extrairPrimeiraImagem(readme) {
-    const regex = /!\[.*?\]\((https?:\/\/.*?\.(?:png|jpg|jpeg|gif|svg))\)/i;
-    const match2 = readme.match(regex);
-    return match2 ? match2[1] : null;
+  extrairPrimeiraImagem(readme, repoName, branch = "main") {
+    const markdownRegex = /!\[[^\]]*?\]\(([^)]+)\)/i;
+    const htmlRegex = /<img[^>]*src=["']([^"']+)["']/i;
+    const match2 = readme.match(markdownRegex) || readme.match(htmlRegex);
+    if (!match2) {
+      return null;
+    }
+    const rawUrl = match2[1].trim();
+    return this.resolverUrlImagem(rawUrl, repoName, branch);
   }
   extrairDescricao(readme) {
     return readme.replace(/!\[.*?\]\(.*?\)/g, "").replace(/[#>*`_]/g, "").split("\n").map((line) => line.trim()).filter((line) => line.length > 30).slice(0, 3).join(" ").trim();
   }
   buscarReadme(repoName, branch) {
-    const url = `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/README.md`;
-    return this.http.get(url, { responseType: "text" });
+    const url = `https://api.github.com/repos/${this.username}/${repoName}/readme`;
+    return this.http.get(url, {
+      responseType: "text",
+      headers: {
+        Accept: "application/vnd.github.raw"
+      }
+    });
+  }
+  resolverUrlImagem(url, repoName, branch = "main") {
+    if (/^(https?:|data:|blob:|\/)/i.test(url)) {
+      if (url.startsWith("/")) {
+        const normalizedPath = url.replace(/^\/+/, "");
+        return `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/${normalizedPath}`;
+      }
+      return url;
+    }
+    const normalized = url.replace(/^\.\/+/, "").replace(/^\/+/, "");
+    return `https://raw.githubusercontent.com/${this.username}/${repoName}/${branch}/${normalized}`;
   }
   criarImagemProjetoSvg(repoName, language) {
     const title = this.apenasIniciais(repoName);
