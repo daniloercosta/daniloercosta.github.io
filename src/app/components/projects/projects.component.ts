@@ -3,23 +3,31 @@ import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { GitHubServiceService } from '../../services/git-hub-service.service';
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, MatIconModule, RouterLink],
   templateUrl: './projects.component.html',
   styleUrl: './projects.component.css'
 })
 export class ProjectsComponent implements OnInit {
   repos: any[] = [];
 
-  constructor(private githubService: GitHubServiceService) {}
+  constructor(
+    private githubService: GitHubServiceService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
 
   ngOnInit(): void {
-    void this.carregarProjetos();
+    if (isPlatformBrowser(this.platformId)) {
+      void this.carregarProjetos();
+    }
   }
 
   async carregarProjetos(): Promise<void> {

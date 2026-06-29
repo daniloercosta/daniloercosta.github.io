@@ -1,0 +1,86 @@
+<section class="project-detail">
+  <a class="back-link" routerLink="/projetos">
+    <mat-icon>arrow_back</mat-icon>
+    Voltar para projetos
+  </a>
+
+  <ng-container *ngIf="!carregando; else loadingState">
+    <ng-container *ngIf="projeto; else errorState">
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Detalhe do projeto</p>
+          <h2>{{ projeto.name }}</h2>
+          <p class="lead">{{ projeto.descricaoCompleta }}</p>
+
+          <div class="topic-row" *ngIf="projeto.topicos?.length">
+            <span *ngFor="let topico of projeto.topicos">{{ topico }}</span>
+          </div>
+
+          <div class="hero-actions">
+            <a mat-raised-button color="primary" [href]="projeto.html_url" target="_blank" rel="noreferrer">
+              <mat-icon>open_in_new</mat-icon>
+              Ver no GitHub
+            </a>
+            <a mat-stroked-button color="accent" [href]="projeto.homepage || projeto.html_url" target="_blank" rel="noreferrer">
+              <mat-icon>link</mat-icon>
+              Acesso ao projeto
+            </a>
+          </div>
+        </div>
+
+        <mat-card class="hero-card">
+          <img [src]="projeto.imagem" [alt]="projeto.name" class="hero-image">
+          <div class="hero-stats">
+            <article>
+              <strong>{{ projeto.language || 'Código' }}</strong>
+              <span>Linguagem</span>
+            </article>
+            <article>
+              <strong>{{ projeto.stargazers_count }}</strong>
+              <span>Estrelas</span>
+            </article>
+            <article>
+              <strong>{{ projeto.forks_count || 0 }}</strong>
+              <span>Forks</span>
+            </article>
+          </div>
+        </mat-card>
+      </div>
+
+      <section class="info-grid">
+        <mat-card class="info-card">
+          <p class="eyebrow">Resumo</p>
+          <h3>Como esse projeto se apresenta hoje.</h3>
+          <p>{{ resumo }}</p>
+          <a class="inline-link" [href]="projeto.homepage || projeto.html_url" target="_blank" rel="noreferrer">
+            Abrir link principal
+          </a>
+        </mat-card>
+
+        <mat-card class="info-card">
+          <p class="eyebrow">Métricas</p>
+          <h3>Dados do repositório</h3>
+          <ul>
+            <li><span>Atualizado em</span><strong>{{ projeto.updated_at | date:'dd/MM/yyyy' }}</strong></li>
+            <li><span>Criado em</span><strong>{{ projeto.created_at | date:'dd/MM/yyyy' }}</strong></li>
+            <li><span>Issues abertas</span><strong>{{ projeto.open_issues_count || 0 }}</strong></li>
+          </ul>
+        </mat-card>
+      </section>
+
+      <mat-card class="readme-card" *ngIf="projeto.readme">
+        <p class="eyebrow">README</p>
+        <h3>Leitura rápida do repositório</h3>
+        <pre>{{ projeto.readme }}</pre>
+      </mat-card>
+    </ng-container>
+  </ng-container>
+</section>
+
+<ng-template #loadingState>
+  <div class="state-card">Carregando detalhes do projeto...</div>
+</ng-template>
+
+<ng-template #errorState>
+  <div class="state-card">{{ erro }}</div>
+</ng-template>

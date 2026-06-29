@@ -2,13 +2,19 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, of } from 'rxjs';
 
-interface GitHubRepo {
+export interface GitHubRepo {
   name: string;
   description: string | null;
   html_url: string;
+  homepage?: string | null;
   pushed_at: string;
+  updated_at?: string;
+  created_at?: string;
   language: string | null;
   stargazers_count: number;
+  forks_count?: number;
+  open_issues_count?: number;
+  topics?: string[];
 }
 
 @Injectable({
@@ -33,6 +39,10 @@ export class GitHubServiceService {
 
   getPerfil(): Observable<any> {
     return this.http.get<any>(`https://api.github.com/users/${this.username}`);
+  }
+
+  getProjeto(repoName: string): Observable<GitHubRepo> {
+    return this.http.get<GitHubRepo>(`https://api.github.com/repos/${this.username}/${repoName}`);
   }
 
   getReadme(repoName: string): Observable<string> {

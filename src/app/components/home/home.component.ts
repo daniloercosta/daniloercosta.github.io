@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, PLATFORM_ID } from '@angular/core';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { firstValueFrom } from 'rxjs';
 import { GitHubServiceService } from '../../services/git-hub-service.service';
@@ -52,11 +54,16 @@ export class HomeComponent implements OnInit {
     ]
   };
 
-  constructor(private githubService: GitHubServiceService) {}
+  constructor(
+    private githubService: GitHubServiceService,
+    @Inject(PLATFORM_ID) private platformId: object
+  ) {}
 
   ngOnInit(): void {
-    void this.carregarPerfil();
-    void this.carregarProjetosAleatorios();
+    if (isPlatformBrowser(this.platformId)) {
+      void this.carregarPerfil();
+      void this.carregarProjetosAleatorios();
+    }
   }
 
   async carregarProjetosAleatorios(): Promise<void> {

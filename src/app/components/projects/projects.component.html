@@ -21,9 +21,13 @@
       </mat-card-content>
 
       <mat-card-actions>
+        <a mat-stroked-button color="primary" [routerLink]="['/projetos', repo.name]">
+          <mat-icon>visibility</mat-icon>
+          Ver detalhes
+        </a>
         <a mat-raised-button color="accent" [href]="repo.html_url" target="_blank" rel="noreferrer">
           <mat-icon>open_in_new</mat-icon>
-          Ver no GitHub
+          GitHub
         </a>
       </mat-card-actions>
     </mat-card>

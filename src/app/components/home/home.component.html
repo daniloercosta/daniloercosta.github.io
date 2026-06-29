@@ -1,9 +1,9 @@
 <section class="home-hero">
   <div class="hero-copy">
-    <p class="eyebrow">Desenvolvimento • Dados • Produto</p>
+    <p class="eyebrow">Desenvolvimento · Dados · Produto</p>
     <h2>Interfaces mais claras, código mais confiável e projetos com presença real.</h2>
     <p class="lead">
-      Trabalho com C#, Angular e SQL para criar experiências que parecem mais cuidadas, rápidas e fáceis de usar.
+      Trabalho com C#, Angular e SQL para criar experiências mais cuidadas, rápidas e fáceis de usar.
     </p>
 
     <div class="hero-actions">
@@ -77,9 +77,9 @@
           <p>{{ projeto.descricao }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <a mat-raised-button color="primary" [href]="projeto.url" target="_blank" rel="noreferrer">
-            <mat-icon>open_in_new</mat-icon>
-            Abrir projeto
+          <a mat-stroked-button color="primary" [routerLink]="['/projetos', projeto.id]">
+            <mat-icon>visibility</mat-icon>
+            Ver detalhes
           </a>
         </mat-card-actions>
       </mat-card>
